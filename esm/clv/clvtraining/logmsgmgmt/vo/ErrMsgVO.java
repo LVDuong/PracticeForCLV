@@ -31,7 +31,7 @@ import com.clt.framework.component.util.JSPUtil;
  * Table Value Ojbect<br>
  * 관련 Event 에서 생성, 서버실행요청시 Data 전달역할을 수행하는 Value Object
  *
- * @author 
+ * @author
  * @since J2EE 1.6
  * @see AbstractValueObject
  */
@@ -39,9 +39,9 @@ import com.clt.framework.component.util.JSPUtil;
 public class ErrMsgVO extends AbstractValueObject {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private Collection<ErrMsgVO> models = new ArrayList<ErrMsgVO>();
-	
+
 	/* Column Info */
 	private String updDt = null;
 	/* Column Info */
@@ -74,7 +74,7 @@ public class ErrMsgVO extends AbstractValueObject {
 
 	/*	테이블 컬럼에 대응되는 멤버변수를 저장하는 Hashtable */
 	private HashMap<String, String> hashFields = new LinkedHashMap<String, String>();
-	
+
 	public ErrMsgVO() {}
 
 	public ErrMsgVO(String ibflag, String pagerows, String edwUpdDt, String updDt, String updUsrId, String creDt, String creUsrId, String errDesc, String errMsg, String errLvlCd, String errTpCd, String langTpCd, String errMsgCd) {
@@ -92,7 +92,7 @@ public class ErrMsgVO extends AbstractValueObject {
 		this.errTpCd = errTpCd;
 		this.updUsrId = updUsrId;
 	}
-	
+
 	/**
 	 * 테이블 컬럼에 저장할 값을 Hashtable<"column_name", "value"> 로 반환
 	 * @return HashMap
@@ -113,7 +113,7 @@ public class ErrMsgVO extends AbstractValueObject {
 		this.hashColumns.put("upd_usr_id", getUpdUsrId());
 		return this.hashColumns;
 	}
-	
+
 	/**
 	 * 컬럼명에 대응되는 멤버변수명을 저장하여 Hashtable<"column_name", "variable"> 로 반환   
 	 * @return
@@ -134,7 +134,7 @@ public class ErrMsgVO extends AbstractValueObject {
 		this.hashFields.put("upd_usr_id", "updUsrId");
 		return this.hashFields;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return updDt
@@ -142,7 +142,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getUpdDt() {
 		return this.updDt;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return langTpCd
@@ -150,7 +150,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getLangTpCd() {
 		return this.langTpCd;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return errLvlCd
@@ -158,7 +158,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getErrLvlCd() {
 		return this.errLvlCd;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return creDt
@@ -166,7 +166,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getCreDt() {
 		return this.creDt;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return edwUpdDt
@@ -174,7 +174,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getEdwUpdDt() {
 		return this.edwUpdDt;
 	}
-	
+
 	/**
 	 * Page Number
 	 * @return pagerows
@@ -182,7 +182,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getPagerows() {
 		return this.pagerows;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return errMsgCd
@@ -190,7 +190,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getErrMsgCd() {
 		return this.errMsgCd;
 	}
-	
+
 	/**
 	 * VO Data Value( C:Creation, U:Update, D:Delete )
 	 * @return ibflag
@@ -198,7 +198,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getIbflag() {
 		return this.ibflag;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return creUsrId
@@ -206,7 +206,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getCreUsrId() {
 		return this.creUsrId;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return errDesc
@@ -214,7 +214,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getErrDesc() {
 		return this.errDesc;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return errMsg
@@ -222,7 +222,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getErrMsg() {
 		return this.errMsg;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return errTpCd
@@ -230,7 +230,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getErrTpCd() {
 		return this.errTpCd;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @return updUsrId
@@ -238,7 +238,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public String getUpdUsrId() {
 		return this.updUsrId;
 	}
-	
+
 
 	/**
 	 * Column Info
@@ -247,7 +247,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setUpdDt(String updDt) {
 		this.updDt = updDt;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param langTpCd
@@ -255,7 +255,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setLangTpCd(String langTpCd) {
 		this.langTpCd = langTpCd;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param errLvlCd
@@ -263,7 +263,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setErrLvlCd(String errLvlCd) {
 		this.errLvlCd = errLvlCd;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param creDt
@@ -271,7 +271,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setCreDt(String creDt) {
 		this.creDt = creDt;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param edwUpdDt
@@ -279,7 +279,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setEdwUpdDt(String edwUpdDt) {
 		this.edwUpdDt = edwUpdDt;
 	}
-	
+
 	/**
 	 * Page Number
 	 * @param pagerows
@@ -287,7 +287,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setPagerows(String pagerows) {
 		this.pagerows = pagerows;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param errMsgCd
@@ -295,7 +295,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setErrMsgCd(String errMsgCd) {
 		this.errMsgCd = errMsgCd;
 	}
-	
+
 	/**
 	 * VO Data Value( C:Creation, U:Update, D:Delete )
 	 * @param ibflag
@@ -303,7 +303,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setIbflag(String ibflag) {
 		this.ibflag = ibflag;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param creUsrId
@@ -311,7 +311,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setCreUsrId(String creUsrId) {
 		this.creUsrId = creUsrId;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param errDesc
@@ -319,7 +319,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setErrDesc(String errDesc) {
 		this.errDesc = errDesc;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param errMsg
@@ -327,7 +327,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setErrMsg(String errMsg) {
 		this.errMsg = errMsg;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param errTpCd
@@ -335,7 +335,7 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setErrTpCd(String errTpCd) {
 		this.errTpCd = errTpCd;
 	}
-	
+
 	/**
 	 * Column Info
 	 * @param updUsrId
@@ -343,8 +343,8 @@ public class ErrMsgVO extends AbstractValueObject {
 	public void setUpdUsrId(String updUsrId) {
 		this.updUsrId = updUsrId;
 	}
-	
-/**
+
+	/**
 	 * Request 의 데이터를 추출하여 VO 의 멤버변수에 설정.
 	 * @param request
 	 */
@@ -389,13 +389,13 @@ public class ErrMsgVO extends AbstractValueObject {
 	 */
 	public ErrMsgVO[] fromRequestGrid(HttpServletRequest request, String prefix) {
 		ErrMsgVO model = null;
-		
-		String[] tmp = request.getParameterValues(prefix + "ibflag");
-  		if(tmp == null)
-   			return null;
 
-  		int length = request.getParameterValues(prefix + "ibflag").length;
-  
+		String[] tmp = request.getParameterValues(prefix + "ibflag");
+		if(tmp == null)
+			return null;
+
+		int length = request.getParameterValues(prefix + "ibflag").length;
+
 		try {
 			String[] updDt = (JSPUtil.getParameter(request, prefix	+ "upd_dt", length));
 			String[] langTpCd = (JSPUtil.getParameter(request, prefix	+ "lang_tp_cd", length));
@@ -410,7 +410,7 @@ public class ErrMsgVO extends AbstractValueObject {
 			String[] errMsg = (JSPUtil.getParameter(request, prefix	+ "err_msg", length));
 			String[] errTpCd = (JSPUtil.getParameter(request, prefix	+ "err_tp_cd", length));
 			String[] updUsrId = (JSPUtil.getParameter(request, prefix	+ "upd_usr_id", length));
-			
+
 			for (int i = 0; i < length; i++) {
 				model = new ErrMsgVO();
 				if (updDt[i] != null)
@@ -456,17 +456,17 @@ public class ErrMsgVO extends AbstractValueObject {
 		ErrMsgVO[] vos = (ErrMsgVO[])models.toArray(new ErrMsgVO[models.size()]);
 		return vos;
 	}
-	
+
 	/**
 	 * VO Class의 내용을 String으로 변환
 	 */
 	public String toString() {
-		   return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE );
-	   }
+		return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE );
+	}
 
 	/**
-	* 포맷팅된 문자열에서 특수문자 제거("-","/",",",":")
-	*/
+	 * 포맷팅된 문자열에서 특수문자 제거("-","/",",",":")
+	 */
 	public void unDataFormat(){
 		this.updDt = this.updDt .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.langTpCd = this.langTpCd .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");

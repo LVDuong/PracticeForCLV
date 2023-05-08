@@ -26,17 +26,17 @@ import com.clt.framework.support.db.ISQLTemplate;
 public class LogMsgMgmtDBDAOErrMsgVODSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
-	
+
 	Logger log =Logger.getLogger(this.getClass());
-	
+
 	/** Parameters definition in params/param elements */
 	private HashMap<String,String[]> params = null;
-	
+
 	/**
-	  * <pre>
-	  *    
-	  * </pre>
-	  */
+	 * <pre>
+	 *
+	 * </pre>
+	 */
 	public LogMsgMgmtDBDAOErrMsgVODSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
@@ -91,16 +91,16 @@ public class LogMsgMgmtDBDAOErrMsgVODSQL implements ISQLTemplate{
 		}
 		params.put("cre_usr_id",new String[]{arrTmp[0],arrTmp[1]});
 
-		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.integration").append("\n"); 
-		query.append("FileName : LogMsgMgmtDBDAOErrMsgVODSQL").append("\n"); 
-		query.append("*/").append("\n"); 
+		query.append("/*").append("\n");
+		query.append("Path : com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.integration").append("\n");
+		query.append("FileName : LogMsgMgmtDBDAOErrMsgVODSQL").append("\n");
+		query.append("*/").append("\n");
 	}
-	
+
 	public String getSQL(){
 		return query.toString();
 	}
-	
+
 	public HashMap<String,String[]> getParams() {
 		return params;
 	}
@@ -109,15 +109,15 @@ public class LogMsgMgmtDBDAOErrMsgVODSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("DELETE FROM COM_ERR_MSG" ).append("\n"); 
-		query.append("WHERE	ERR_MSG_CD = @[err_msg_cd]" ).append("\n"); 
-		query.append("AND	LANG_TP_CD = 'ENG'" ).append("\n"); 
-		query.append("AND	ERR_TP_CD = @[err_tp_cd]" ).append("\n"); 
-		query.append("AND	ERR_LVL_CD = @[err_lvl_cd]" ).append("\n"); 
-		query.append("AND	ERR_MSG = @[err_msg]" ).append("\n"); 
-		query.append("AND	ERR_DESC = @[err_desc]" ).append("\n"); 
-		query.append("AND	CRE_USR_ID = @[cre_usr_id]" ).append("\n"); 
-		query.append("AND	UPD_USR_ID = @[upd_usr_id]" ).append("\n"); 
+		query.append("DELETE FROM COM_ERR_MSG" ).append("\n");
+		query.append("WHERE	ERR_MSG_CD = @[err_msg_cd]" ).append("\n");
+		query.append("AND	LANG_TP_CD = 'ENG'" ).append("\n");
+		query.append("AND	ERR_TP_CD = @[err_tp_cd]" ).append("\n");
+		query.append("AND	ERR_LVL_CD = @[err_lvl_cd]" ).append("\n");
+		query.append("AND	ERR_MSG = @[err_msg]" ).append("\n");
+		query.append("AND	ERR_DESC = @[err_desc]" ).append("\n");
+		query.append("AND	CRE_USR_ID = @[cre_usr_id]" ).append("\n");
+		query.append("AND	UPD_USR_ID = @[upd_usr_id]" ).append("\n");
 
 	}
 }

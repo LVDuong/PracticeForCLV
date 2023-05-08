@@ -26,30 +26,30 @@ import com.clt.framework.support.db.ISQLTemplate;
 public class LogMsgMgmtDBDAOErrMsgVOUSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
-	
+
 	Logger log =Logger.getLogger(this.getClass());
-	
+
 	/** Parameters definition in params/param elements */
 	private HashMap<String,String[]> params = null;
-	
+
 	/**
-	  * <pre>
-	  * 
-	  * </pre>
-	  */
+	 * <pre>
+	 *
+	 * </pre>
+	 */
 	public LogMsgMgmtDBDAOErrMsgVOUSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
-		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.integration").append("\n"); 
-		query.append("FileName : LogMsgMgmtDBDAOErrMsgVOUSQL").append("\n"); 
-		query.append("*/").append("\n"); 
+		query.append("/*").append("\n");
+		query.append("Path : com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.integration").append("\n");
+		query.append("FileName : LogMsgMgmtDBDAOErrMsgVOUSQL").append("\n");
+		query.append("*/").append("\n");
 	}
-	
+
 	public String getSQL(){
 		return query.toString();
 	}
-	
+
 	public HashMap<String,String[]> getParams() {
 		return params;
 	}
@@ -58,6 +58,6 @@ public class LogMsgMgmtDBDAOErrMsgVOUSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		
+
 	}
 }

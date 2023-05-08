@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://www.cyberlogitec.com/mappings">
+	<!-- DuongLe : 2023-04-20 start -->
+    <url-mapping url="CLV_LOG_001.do" screen="CLV_LOG_001.screen" >
+        <web-action-class>com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.event.CLV_LOG_001HTMLAction</web-action-class>
+    </url-mapping>
+
+    <url-mapping url="CLV_LOG_001GS.do" screen="com.clt.framework.core.controller.DefaultViewAdapter" >
+        <web-action-class>com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.event.CLV_LOG_001HTMLAction</web-action-class>
+    </url-mapping>
+
+    <event-mapping>
+        <event-class>com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.event.ClvLog001Event</event-class>
+        <service-action-class>com.clt.apps.opus.esm.clv.clvtraining.ClvTrainingSC</service-action-class>
+    </event-mapping>
+	<!-- DuongLe : 2023-04-20 end -->
+
+</mappings>

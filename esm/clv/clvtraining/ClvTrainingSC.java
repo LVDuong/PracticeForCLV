@@ -29,7 +29,7 @@ import com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.vo.ErrMsgVO;
 
 /**
  * ALPS-ClvTraining Business Logic ServiceCommand - ALPS-ClvTraining 대한 비지니스 트랜잭션을 처리한다.
- * 
+ *
  * @author DuongLe
  * @see LogMsgMgmtDBDAO
  * @since J2EE 1.6
@@ -64,7 +64,7 @@ public class ClvTrainingSC extends ServiceCommandSupport {
 	/**
 	 * 각 이벤트에 해당하는 업무 시나리오 수행<br>
 	 * ALPS-ClvTraining system 업무에서 발생하는 모든 이벤트의 분기처리<br>
-	 * 
+	 *
 	 * @param e Event
 	 * @return EventResponse
 	 * @exception EventException
@@ -87,7 +87,7 @@ public class ClvTrainingSC extends ServiceCommandSupport {
 	/**
 	 * CLV_LOG_001 : [이벤트]<br>
 	 * [비즈니스대상]을 [행위]합니다.<br>
-	 * 
+	 *
 	 * @param Event e
 	 * @return EventResponse
 	 * @exception EventException
@@ -105,7 +105,7 @@ public class ClvTrainingSC extends ServiceCommandSupport {
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		}catch(Exception ex){
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
-		}	
+		}
 		return eventResponse;
 	}
 	/**

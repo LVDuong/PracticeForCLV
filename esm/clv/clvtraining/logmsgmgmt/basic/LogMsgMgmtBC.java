@@ -29,16 +29,16 @@ public interface LogMsgMgmtBC {
 
 	/**
 	 * [비즈니스대상]을 [행위] 합니다.<br>
-	 * 
+	 *
 	 * @param ErrMsgVO	errMsgVO
 	 * @return List<ErrMsgVO>
 	 * @exception EventException
 	 */
 	public List<ErrMsgVO> SearchLogMsg(ErrMsgVO errMsgVO) throws EventException;
-	
+
 	/**
 	 * [비즈니스대상]을 [행위] 합니다.<br>
-	 * 
+	 *
 	 * @param ErrMsgVO[] errMsgVO
 	 * @param account SignOnUserAccount
 	 * @exception EventException

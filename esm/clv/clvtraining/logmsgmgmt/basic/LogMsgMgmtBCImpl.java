@@ -43,7 +43,7 @@ public class LogMsgMgmtBCImpl extends BasicCommandSupport implements LogMsgMgmtB
 	}
 	/**
 	 * [비즈니스대상]을 [행위] 합니다.<br>
-	 * 
+	 *
 	 * @param ErrMsgVO errMsgVO
 	 * @return List<ErrMsgVO>
 	 * @exception EventException
@@ -56,12 +56,12 @@ public class LogMsgMgmtBCImpl extends BasicCommandSupport implements LogMsgMgmtB
 		} catch (Exception ex) {
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * [비즈니스대상]을 [행위] 합니다.<br>
-	 * 
+	 *
 	 * @param ErrMsgVO[] errMsgVO
 	 * @param account SignOnUserAccount
 	 * @exception EventException
@@ -84,15 +84,15 @@ public class LogMsgMgmtBCImpl extends BasicCommandSupport implements LogMsgMgmtB
 					deleteVoList.add(errMsgVO[i]);
 				}
 			}
-			
+
 			if ( insertVoList.size() > 0 ) {
 				dbDao.addManageLogMsgS(insertVoList);
 			}
-			
+
 			if ( updateVoList.size() > 0 ) {
 				dbDao.modifyManageLogMsgS(updateVoList);
 			}
-			
+
 			if ( deleteVoList.size() > 0 ) {
 				dbDao.removeManageLogMsgS(deleteVoList);
 			}
@@ -102,5 +102,5 @@ public class LogMsgMgmtBCImpl extends BasicCommandSupport implements LogMsgMgmtB
 			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		}
 	}
-	
+
 }

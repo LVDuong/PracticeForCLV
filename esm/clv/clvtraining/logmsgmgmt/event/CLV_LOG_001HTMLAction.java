@@ -49,16 +49,16 @@ public class CLV_LOG_001HTMLAction extends HTMLActionSupport {
 	 * @exception HTMLActionException
 	 */
 	public Event perform(HttpServletRequest request) throws HTMLActionException {
-		
-    	FormCommand command = FormCommand.fromRequest(request);
+
+		FormCommand command = FormCommand.fromRequest(request);
 		ClvLog001Event event = new ClvLog001Event();
-		
+
 		ErrMsgVO errMsgVO = new ErrMsgVO();
 		errMsgVO.setErrMsgCd(request.getParameter("s_err_msg_cd"));
 		errMsgVO.setErrMsg(request.getParameter("s_err_msg"));
 //		errMsgVO.setErrMsgCd(JSPUtil.getParameter(request, "s_err_msg_cd", ""));
 //		errMsgVO.setErrMsg(JSPUtil.getParameter(request, "s_err_msg", ""));
-		
+
 		if(command.isCommand(FormCommand.MULTI)) {
 			event.setErrMsgVOS((ErrMsgVO[])getVOs(request, ErrMsgVO .class,""));
 		}
@@ -72,7 +72,7 @@ public class CLV_LOG_001HTMLAction extends HTMLActionSupport {
 	/**
 	 * HttpRequest의 attribute에 업무시나리오 수행결과 값 저장<br>
 	 * ServiceCommand에서 View(JSP)로 실행결과를 전송하는 ResultSet을 request에 셋팅<br>
-	 * 
+	 *
 	 * @param request HttpServletRequest HttpRequest
 	 * @param eventResponse EventResponse interface를 구현한 객체
 	 */
@@ -83,7 +83,7 @@ public class CLV_LOG_001HTMLAction extends HTMLActionSupport {
 	/**
 	 * HttpRequest의 attribute에 HttpRequest 파싱 수행결과 값 저장<br>
 	 * HttpRequest 파싱 수행결과 값 request에 셋팅<br>
-	 * 
+	 *
 	 * @param request HttpServletRequest HttpRequest
 	 * @param event Event interface를 구현한 객체
 	 */

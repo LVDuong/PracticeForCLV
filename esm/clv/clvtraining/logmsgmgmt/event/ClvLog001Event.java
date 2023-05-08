@@ -29,15 +29,15 @@ import com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.vo.ErrMsgVO;
 public class ClvLog001Event extends EventSupport {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/** Table Value Object 조회 조건 및 단건 처리  */
 	ErrMsgVO errMsgVO = null;
-	
+
 	/** Table Value Object Multi Data 처리 */
 	ErrMsgVO[] errMsgVOs = null;
 
 	public ClvLog001Event(){}
-	
+
 	public void setErrMsgVO(ErrMsgVO errMsgVO){
 		this. errMsgVO = errMsgVO;
 	}
