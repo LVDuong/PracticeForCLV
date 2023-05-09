@@ -50,19 +50,19 @@ public class CLV_LOG_001HTMLAction extends HTMLActionSupport {
 	 */
 	public Event perform(HttpServletRequest request) throws HTMLActionException {
 
+		//Get f_command from client
 		FormCommand command = FormCommand.fromRequest(request);
 		ClvLog001Event event = new ClvLog001Event();
-
-		ErrMsgVO errMsgVO = new ErrMsgVO();
-		errMsgVO.setErrMsgCd(request.getParameter("s_err_msg_cd"));
-		errMsgVO.setErrMsg(request.getParameter("s_err_msg"));
-//		errMsgVO.setErrMsgCd(JSPUtil.getParameter(request, "s_err_msg_cd", ""));
-//		errMsgVO.setErrMsg(JSPUtil.getParameter(request, "s_err_msg", ""));
 
 		if(command.isCommand(FormCommand.MULTI)) {
 			event.setErrMsgVOS((ErrMsgVO[])getVOs(request, ErrMsgVO .class,""));
 		}
 		else if(command.isCommand(FormCommand.SEARCH)) {
+			ErrMsgVO errMsgVO = new ErrMsgVO();
+			//set parameter has name s_err_msg_cd for ErrMsgCd
+			errMsgVO.setErrMsgCd(JSPUtil.getParameter(request, "s_err_msg_cd", ""));
+			//set parameter has name s_err_msg for ErrMsg
+			errMsgVO.setErrMsg(JSPUtil.getParameter(request, "s_err_msg", ""));
 			event.setErrMsgVO(errMsgVO);
 		}
 

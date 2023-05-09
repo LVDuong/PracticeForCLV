@@ -14,6 +14,9 @@ package com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.basic;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.python.modules.newmodule;
+
 import com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.integration.LogMsgMgmtDBDAO;
 import com.clt.framework.component.message.ErrorHandler;
 import com.clt.framework.core.layer.event.EventException;
@@ -71,18 +74,33 @@ public class LogMsgMgmtBCImpl extends BasicCommandSupport implements LogMsgMgmtB
 			List<ErrMsgVO> insertVoList = new ArrayList<ErrMsgVO>();
 			List<ErrMsgVO> updateVoList = new ArrayList<ErrMsgVO>();
 			List<ErrMsgVO> deleteVoList = new ArrayList<ErrMsgVO>();
+
+			StringBuilder duplicateMsgCds = new StringBuilder();
+
 			for ( int i=0; i<errMsgVO .length; i++ ) {
-				errMsgVO[i].setCreUsrId(account.getUsr_id());
-				errMsgVO[i].setUpdUsrId(account.getUsr_id());
 				if ( errMsgVO[i].getIbflag().equals("I")){
-					errMsgVO[i].setCreUsrId(account.getUsr_id());
-					insertVoList.add(errMsgVO[i]);
+					//Create VO to check duplicate before insert
+					ErrMsgVO dupErrMsgVO = new ErrMsgVO();
+					dupErrMsgVO.setErrMsgCd(errMsgVO[i].getErrMsgCd());
+
+					if(SearchLogMsg(dupErrMsgVO).size() == 0) {
+						errMsgVO[i].setCreUsrId(account.getUsr_id());
+						errMsgVO[i].setUpdUsrId(account.getUsr_id());
+						insertVoList.add(errMsgVO[i]);
+					} else {
+						duplicateMsgCds.append(errMsgVO[i].getErrMsgCd() + "|");
+					}
 				} else if ( errMsgVO[i].getIbflag().equals("U")){
 					errMsgVO[i].setUpdUsrId(account.getUsr_id());
 					updateVoList.add(errMsgVO[i]);
 				} else if ( errMsgVO[i].getIbflag().equals("D")){
 					deleteVoList.add(errMsgVO[i]);
 				}
+			}
+
+			if (duplicateMsgCds.length() > 0) {
+				duplicateMsgCds.deleteCharAt(duplicateMsgCds.length() - 1);
+				throw new EventException(new ErrorHandler("ERR12356", new String[]{duplicateMsgCds.toString()}).getMessage());
 			}
 
 			if ( insertVoList.size() > 0 ) {

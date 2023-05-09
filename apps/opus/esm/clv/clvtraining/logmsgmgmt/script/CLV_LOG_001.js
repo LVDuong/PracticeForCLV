@@ -10,22 +10,7 @@
 * 2023.04.20 
 * 1.0 Creation
 =========================================================*/
-/****************************************************************************************
-  이벤트 구분 코드: [초기화]INIT=0; [입력]ADD=1; [조회]SEARCH=2; [리스트조회]SEARCHLIST=3;
-					[수정]MODIFY=4; [삭제]REMOVE=5; [리스트삭제]REMOVELIST=6 [다중처리]MULTI=7
-					기타 여분의 문자상수  COMMAND01=11; ~ COMMAND20=30;
- ***************************************************************************************/
 
-/*------------------다음 코드는 JSDoc을 잘 만들기 위해서 추가된 코드임 ------------------*/
-   /**
-     * @fileoverview 업무에서 공통으로 사용하는 자바스크립트파일로 달력 관련 함수가 정의되어 있다.
-     * @author 한진해운
-     */
-
-    /**
-     * @extends 
-     * @class CLV_LOG_001 : CLV_LOG_001 생성을 위한 화면에서 사용하는 업무 스크립트를 정의한다.
-     */
 var tabObjects=new Array();
 var tabCnt=0 ;
 var beforetab=1;
@@ -34,6 +19,9 @@ var sheetCnt=0;
 var rowcount=0;
 document.onclick=processButtonClick;
 
+/**
+ * handle event onclick
+ */
 function processButtonClick() {
 	/** *** setting sheet object **** */
 	var sheetObject1 = sheetObjects[0];
@@ -76,6 +64,9 @@ function processButtonClick() {
 	}
 }
 
+/**
+ * Add sheet object to array
+ */
 function setSheetObject(sheet_obj) {
 	sheetObjects[sheetCnt++] = sheet_obj;
 }
@@ -89,6 +80,9 @@ function resetForm(formObj){
 	s_jo_crr_cd.SetSelectIndex(0);
 }
 
+/**
+ * Function that is called after the JSP file is loaded
+ */
 function loadPage(){
 	//generate Grid Layout
 	for (i = 0; i < sheetObjects.length; i++) {
@@ -96,69 +90,90 @@ function loadPage(){
 		initSheet(sheetObjects[i], i + 1);
 		ComEndConfigSheet(sheetObjects[i]);
 	}
-	
+
 	//auto search data after loading finish.
 	doActionIBSheet(sheetObjects[0], document.form, IBSEARCH);
 }
 
+/**
+ * Sheet configuration
+ */
 function initSheet(sheetObj,sheetNo) {
 	var cnt = 0;
 	var sheetID=sheetObj.id;
 	switch (sheetID) {
 		case "sheet1": // sheet1 init
 			with (sheetObj) {
-
+			//Define header title
+			//Each | will separate header that show on sheet
 			var HeadTitle = "|Del|Msg Cd|Msg Type|Msg level|Message|Description";
 			var headCount = ComCountHeadTitle(HeadTitle);
-			// (headCount, 0, 0, true);z
 
+			//SearchMode: Configure search mode (Default: 2)
+            //Page: Number of rows to display in one page (Default=20)
+            //Lazy load mode, only display 20 rows in one page
 			SetConfig({SearchMode:2, MergeSheet:5, Page:20, FrozenCol:0, DataRowMerge:1});
 
 			var info = {Sort : 1, ColMove : 1, HeaderCheck : 0, ColResize : 1};
 			var headers = [ { Text : HeadTitle, Align : "Center" }];
 			InitHeaders(headers, info);
 
-			var cols = [ 
-	             { Type : "Status", 	Hidden : 1, Width : 50, 	Align : "Center", 	ColMerge : 0, SaveName : "ibflag" }, 
+			var cols = [
+	             { Type : "Status", 	Hidden : 1, Width : 50, 	Align : "Center", 	ColMerge : 0, SaveName : "ibflag" },
 	             { Type : "DelCheck", 	Hidden : 0, Width : 50, 	Align : "Center", 	ColMerge : 0, SaveName : "DEL" },
 	             { Type : "Text", 		Hidden : 0, Width : 100, 	Align : "Center", 	ColMerge : 0, SaveName : "err_msg_cd", 	KeyField : 1, Format : "", UpdateEdit : 0, InsertEdit : 1 },
-	             { Type : "Combo", 		Hidden : 0, Width : 100, 	Align : "Center", 	ColMerge : 0, SaveName : "err_tp_cd", 	KeyField : 1, Format : "", UpdateEdit : 1, InsertEdit : 1, ComboText:"Server|UI|Both", ComboCode:"S|U|B" }, 
+	             { Type : "Combo", 		Hidden : 0, Width : 100, 	Align : "Center", 	ColMerge : 0, SaveName : "err_tp_cd", 	KeyField : 1, Format : "", UpdateEdit : 1, InsertEdit : 1, ComboText:"Server|UI|Both", ComboCode:"S|U|B" },
 	             { Type : "Combo", 		Hidden : 0, Width : 100, 	Align : "Center", 	ColMerge : 0, SaveName : "err_lvl_cd", 	KeyField : 1, Format : "", UpdateEdit : 1, InsertEdit : 1, ComboText:"ERR|WARNING|INFO", ComboCode:"E|W|I" },
-	             { Type : "Text", 		Hidden : 0, Width : 600, 	Align : "Left", 	ColMerge : 0, SaveName : "err_msg", 	KeyField : 1, Format : "", UpdateEdit : 1, InsertEdit : 1, MultiLineText:1 }, 
-	             { Type : "Text", 		Hidden : 0, Width : 100, 	Align : "Left", 	ColMerge : 0, SaveName : "err_desc", 	KeyField : 0, Format : "", UpdateEdit : 1, InsertEdit : 1 } 
+	             { Type : "Text", 		Hidden : 0, Width : 600, 	Align : "Left", 	ColMerge : 0, SaveName : "err_msg", 	KeyField : 1, Format : "", UpdateEdit : 1, InsertEdit : 1, MultiLineText:1 },
+	             { Type : "Text", 		Hidden : 0, Width : 100, 	Align : "Left", 	ColMerge : 0, SaveName : "err_desc", 	KeyField : 0, Format : "", UpdateEdit : 1, InsertEdit : 1 }
 	             ];
 
+			//Initialize columns base on above configure
 			InitColumns(cols);
+
+			//Check or configure whether to display waiting image during processing.
 			SetWaitImageVisible(0);
-			resizeSheet();
+
+			//Resize sheet for each screen of user
+			ComResizeSheet(sheetObjects[0]);
 		}
 		break;
 	}
 
 }
 
-function resizeSheet() {
-	ComResizeSheet(sheetObjects[0]);
-}
-
+/**
+ * Define transaction logic between UI and server
+ *
+ * @param sheetObj
+ * @param formObj
+ * @param sAction
+ */
 function doActionIBSheet(sheetObj,formObj,sAction) {
+
 	switch (sAction) {
 	case IBSEARCH: // retrieve
-		if(!validateForm(sheetObj,formObj,sAction)) return
-		ComOpenWait(true);
+		//set value for f_cmd, it will be hidden in UI
 		formObj.f_cmd.value = SEARCH;
+
+		// ComOpenWait:Whether a loading image will appears and lock the screen
+		// true: lock the screen and appear loading image
+	    // false: return normal
+		ComOpenWait(true);
+
+		//Call Search in server
 		sheetObj.DoSearch("CLV_LOG_001GS.do", FormQueryString(formObj) );
 		break;
-	case IBSAVE: // retrieve
-		if(!validateForm(sheetObj,formObj,sAction))return;
+	case IBSAVE: // save
+		//set value for f_cmd, it will be hi
+		// ComOpenWait:Whether a loading image will appears and lock the screen
+		// true: lock the screen and appear loading image
+	    // false: return normaldden in UI
 		formObj.f_cmd.value = MULTI;
 		var result = sheetObj.DoSave("CLV_LOG_001GS.do", FormQueryString(formObj));
 		if(result === true) {
 			ComShowCodeMessage('COM132601');
 		}
-//		if(sheetObj.DoSave("CLV_LOG_001GS.do", FormQueryString(formObj))) {
-//			ComShowCodeMessage('COM132601');
-//		}
 		break;
 	case IBINSERT: //Row Add button event
 		sheetObj.DataInsert(-1);
@@ -174,23 +189,56 @@ function doActionIBSheet(sheetObj,formObj,sAction) {
 	}
 }
 
-function sheet1_OnSearchEnd(sheetObj, Code, Msg, StCode, StMsg) { 
+//Handling event after searching
+function sheet1_OnSearchEnd(sheetObj, Code, Msg, StCode, StMsg) {
  	ComOpenWait(false);
 }
 
-function sheet1_OnSaveEnd(sheetObj, Code, Msg, StCode, StMsg) { 
-	ComOpenWait(false);
+/**
+ * Event fires when saving is completed using saving function
+ * This event can fire when DoSave function is called.
+ * ObjectID_OnSaveEnd(sheetObj, Code, Msg)
+ * 	sheetObj: sheet object
+ * 	Code: Processing result code (0 or higher is success, others should be processed as error)
+ * 	Msg: HTTP response message
+ */
+function sheet1_OnSaveEnd(sheetObj, Code, Msg, StCode, StMsg) {
+	//if success reload page by calling action IBSEARCH
+	if(Code>=0){
+		doActionIBSheet(sheetObj, document.form, IBSEARCH);
+	}
+	//otherwise we get all row have status 'I' (Insert)
+	var invalidData=sheetObj.FindStatusRow('I');
+
+	//slipt by ';'
+	var rows=invalidData.split(';');
+
+	//loop through rows
+	for(var i=0;i<rows.length;i++){
+		//get value of error message code at current cell
+		var msgCd=sheetObj.GetCellValue(rows[i],"err_msg_cd");
+		//if it is invalid
+		if(Msg.includes(msgCd)){
+			//change the row color to red
+			sheetObj.SetRowBackColor(rows[i],"#f58167");
+		}else{
+			//otherwise we change the row color to white
+			sheetObj.SetRowBackColor(rows[i],"#ffffff");
+		}
+	}
 }
 
 
 function validateForm(sheetObj, formObj, sAction) {
-    with(formObj){
-//      if (!isNumber(formObj.iPage)) {
-//          return false;
-//      }
-  }
-  return true;
-	
+	//Check duplicate on Client side
+    var findText=sheetObj.FindText("err_msg_cd",msgCd);
+    if(findText!=-1&&findText!=sheetObj.GetSelectRow()){
+    	 ComShowCodeMessage("COM131302",msgCd);
+         return false;
+    }
+
+    return true;
+
 }
 
 /**
@@ -217,37 +265,7 @@ function sheet1_OnPopupClick(sheetObj,Row,Col){
 }
 
 function sheet1_OnChange(sheetObj,Row,Col){
-	 if(Col == 2){
-		var code=sheetObj.GetCellValue(Row, Col);
-	    for(var int=1; int < sheetObj.RowCount(); int++) {
-		var orlcode=sheetObj.GetCellValue(int, Col);
-		/* null 인 경우와 자기 자신은 비교할 필요가 없음 */
-			if(code != '' && int != Row && code == orlcode){
-				 //ComShowMessage("동일한 Message Code가 존재합니다.");
-				 ComShowCodeMessage('COM131302',code);
-				 sheetObj.SetCellValue(Row, Col,"");
-				 return;
-			 }
-		 }
-	 }
+	if(sheetObj.ColSaveName(Col) == "err_msg_cd"){
+	    validateForm(sheetObj);
+	}
 }
-
-function sheet1_OnSearchEnd(sheetObj, Code, Msg, StCode, StMsg) { 
- 	ComOpenWait(false);
- }
-
-	function CLV_LOG_001() {
-    	this.processButtonClick		= tprocessButtonClick;
-    	this.setSheetObject 		= setSheetObject;
-    	this.loadPage 				= loadPage;
-    	this.initSheet 				= initSheet;
-    	this.initControl            = initControl;
-    	this.doActionIBSheet 		= doActionIBSheet;
-    	this.setTabObject 			= setTabObject;
-    	this.validateForm 			= validateForm;
-    }
-    
-   	/* 개발자 작업	*/
-
-
-	/* 개발자 작업  끝 */

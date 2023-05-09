@@ -8,7 +8,7 @@
 *@LastModifyDate : 2023.04.20
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2023.04.20 
+* 2023.04.20
 * 1.0 Creation
 =========================================================*/
 %>
@@ -25,9 +25,9 @@
 
 <%
 	ClvLog001Event  event = null;					//PDTO(Data Transfer Object including Parameters)
-	Exception serverException   = null;			//서버에서 발생한 에러
-	String strErrMsg = "";						//에러메세지
-	int rowCount	 = 0;						//DB ResultSet 리스트의 건수
+	Exception serverException   = null;				//Server Exception
+	String strErrMsg = "";							//String of Error mesage
+	int rowCount	 = 0;							//DB ResultSet
 
 	String successFlag = "";
 	String codeList  = "";
@@ -50,7 +50,6 @@
 			strErrMsg = new ErrorHandler(serverException).loadPopupMessage();
 		}
 
-		// 초기화면 로딩시 서버로부터 가져온 데이터 추출하는 로직추가 ..
 		GeneralEventResponse eventResponse = (GeneralEventResponse) request.getAttribute("EventResponse");
 
 	}catch(Exception e) {
@@ -77,21 +76,30 @@
 <form name="form">
 <input type="hidden" name="f_cmd">
 <input type="hidden" name="pagerows">
-<!-- 개발자 작업	-->
+<!-- page_title_area(S) -->
 	<div class="page_title_area clear">
+		<!-- page_title(S) -->
 		<h2 class="page_title"><button type="button"><span id="title"></span></button></h2>
+		<!-- page_title(E) -->
+		<!-- opus_design_btn(S) -->
 		<div class="opus_design_btn">
 		   <button type="button" class="btn_accent" name="btn_Retrieve" id="btn_Retrieve">Retrieve</button><!--
 		   --><button class="btn_normal" name="btn_New" id="btn_New" type="button">New</button><!--
 		   --><button type="button" class="btn_normal" name="btn_Save" id="btn_Save">Save</button><!--
 		   --><button type="button" class="btn_normal" name="btn_DownExcel" id="btn_DownExcel">Down Excel</button>
 		</div>
+		<!-- opus_design_btn(E) -->
+		<!-- page_location(S) -->
 	    <div class="location">
 	     	<span id="navigation"></span>
 	    </div>
+	    <!-- page_location(E) -->
 	</div>
-	
+	<!-- page_title_area(E) -->
+
+	<!-- wrap_search(S) -->
 	<div class="wrap_search">
+		<!-- opus_design_inquiry(S) -->
 		<div class="opus_design_inquiry">
 		    <table>
 		        <tbody>
@@ -100,22 +108,27 @@
 				<td width="120"><input type="text" style="width:100px;" class="input" value="" name="s_err_msg_cd" id="s_err_msg_cd"></td>
 				<th width="40">Message</th>
 				<td><input type="text" style="width:100px;" class="input" value="" name="s_err_msg" id="s_err_msg"></td>
-				</tr> 
+				</tr>
 				</tbody>
 			</table>
 		</div>
+		<!-- opus_design_inquiry(E) -->
 	</div>
-		
+	<!-- wrap_search(E) -->
+
+	<!-- wrap_result(S) -->
 	<div class="wrap_result">
+		<!-- opus_design_grid(S) -->
 		<div class="opus_design_grid">
 		<div class="opus_design_btn">
 			<button type="button" class="btn_accent" name="btn_Add" id="btn_Add">Row Add</button>
 		</div>
 			<script language="javascript">ComSheetObject('sheet1');</script>
 		</div>
+		<!-- opus_design_grid(E) -->
 	</div>
+	<!-- wrap_result(E) -->
 
-<!-- 개발자 작업  끝 -->
 </form>
 </body>
 </html>

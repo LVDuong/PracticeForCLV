@@ -91,6 +91,7 @@ public class LogMsgMgmtDBDAO extends DBDAOSupport {
 		try {
 			Map<String, String> mapVO = errMsgVO .getColumnValues();
 
+			//Add all value to param and velParam
 			param.putAll(mapVO);
 			velParam.putAll(mapVO);
 
@@ -125,6 +126,7 @@ public class LogMsgMgmtDBDAO extends DBDAOSupport {
 		try {
 			Map<String, String> mapVO = errMsgVO .getColumnValues();
 
+			//Add all value to param and velParam
 			param.putAll(mapVO);
 			velParam.putAll(mapVO);
 
@@ -160,6 +162,7 @@ public class LogMsgMgmtDBDAO extends DBDAOSupport {
 		try {
 			Map<String, String> mapVO = errMsgVO .getColumnValues();
 
+			//Add all value to param and velParam
 			param.putAll(mapVO);
 			velParam.putAll(mapVO);
 
@@ -190,14 +193,6 @@ public class LogMsgMgmtDBDAO extends DBDAOSupport {
 		try {
 			SQLExecuter sqlExe = new SQLExecuter("");
 			if(errMsgVO .size() > 0){
-				for (int i = 0; i < errMsgVO.size(); i++) {
-					ErrMsgVO checkErrMsgVO = new ErrMsgVO();
-					checkErrMsgVO.setErrMsgCd(errMsgVO.get(i).getErrMsgCd());
-					List<ErrMsgVO> errMsgVOs = SearchLogMsg(checkErrMsgVO);
-					if (errMsgVOs.size() > 0) {
-						throw new DAOException("Duplicate record with MsgCd: " + errMsgVOs.get(0).getErrMsgCd());
-					}
-				}
 				insCnt = sqlExe.executeBatch((ISQLTemplate)new LogMsgMgmtDBDAOErrMsgVOCSQL(), errMsgVO,null);
 				for(int i = 0; i < insCnt.length; i++){
 					if(insCnt[i]== Statement.EXECUTE_FAILED)
