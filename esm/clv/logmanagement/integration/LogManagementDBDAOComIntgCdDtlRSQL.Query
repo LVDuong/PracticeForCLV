@@ -2,20 +2,29 @@
 <sqls>
 	<querys>
 		<query name="LogManagementDBDAOComIntgCdDtlRSQL">
-			<desc><![CDATA[LogManagementDBDAOComIntgCdDtlRSQL]]></desc>
+			<desc><![CDATA[LogManagementDAOLogDtlRSQL]]></desc>
 			<sql><![CDATA[
-SELECT B.INTG_CD_ID,
-B.INTG_CD_VAL_CTNT,
-REPLACE(B.INTG_CD_VAL_DP_DESC,'&','&'||'amp;') INTG_CD_VAL_DP_DESC,
-REPLACE(B.INTG_CD_VAL_DESC,'&','&'||'amp;') INTG_CD_VAL_DESC,
-B.INTG_CD_VAL_DP_SEQ,
-B.APLY_ST_DT,
-B.APLY_END_DT
-FROM COM_INTG_CD_DTL B
-WHERE B.INTG_CD_ID=@[codeid]
-ORDER BY B.INTG_CD_ID, B.INTG_CD_VAL_DP_SEQ			]]></sql>
+SELECT 
+	UPD_DT
+,	UPD_USR_ID
+,	CRE_DT
+,	CRE_USR_ID
+,	APLY_END_DT
+,	APLY_ST_DT
+,	INTG_CD_VAL_DP_SEQ
+,	INTG_CD_VAL_DESC
+,	INTG_CD_VAL_DP_DESC
+,	INTG_CD_VAL_CTNT
+,	INTG_CD_ID
+FROM COM_INTG_CD_DTL
+WHERE UPPER(INTG_CD_ID) LIKE UPPER(@[intg_cd_id])
+
+#if(${intg_cd_val_ctnt}!='') 
+AND UPPER(INTG_CD_VAL_CTNT) LIKE UPPER(@[intg_cd_val_ctnt])
+#end			]]></sql>
 			<params>
-				<param name="codeid" type="12" value="" out="N"/>
+				<param name="intg_cd_id" type="12" value="" out="N"/>
+				<param name="intg_cd_val_ctnt" type="12" value="" out="N"/>
 			</params>
 		</query>
 	</querys>

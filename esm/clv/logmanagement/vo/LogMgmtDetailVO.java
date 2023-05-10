@@ -1,42 +1,23 @@
-/*=========================================================
-*Copyright(c) 2009 CyberLogitec
-*@FileName : LogMgmtDtlVO.java
-*@FileTitle : LogMgmtDtlVO
-*Open Issues :
-*Change history :
-*@LastModifyDate : 2009.05.25
-*@LastModifier : 이선영
-*@LastVersion : 1.0
-* 2009.05.25 이선영 
-* 1.0 Creation
-=========================================================*/
-
 package com.clt.apps.opus.esm.clv.logmanagement.vo;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
 
 import com.clt.framework.component.common.AbstractValueObject;
 import com.clt.framework.component.util.JSPUtil;
 
-/**
- * Table Value Ojbect<br>
- * 관련 Event 에서 생성, 서버실행요청시 Data 전달역할을 수행하는 Value Object
- *
- * @author 이선영
- * @since J2EE 1.6
- * @see AbstractValueObject
- */
+public class LogMgmtDetailVO extends AbstractValueObject {
 
-public class LogMgmtDtlVO extends AbstractValueObject {
-
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
-	private Collection<LogMgmtDtlVO> models = new ArrayList<LogMgmtDtlVO>();
+	private Collection<LogMgmtDetailVO> models = new ArrayList<LogMgmtDetailVO>();
 	
 	/* Column Info */
 	private String updDt = null;
@@ -57,23 +38,23 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 	/* VO Data Value( C:Creation, U:Update, D:Delete ) */
 	private String ibflag = null;
 	/* Column Info */
-	private String intgCdValDesc = null;
-	/* Column Info */
 	private String creUsrId = null;
+	/* Column Info */
+	private String intgCdValDesc = null;
 	/* Column Info */
 	private String intgCdValCtnt = null;
 	/* Column Info */
 	private String updUsrId = null;
 
 	/*	테이블 컬럼의 값을 저장하는 Hashtable */
-	private HashMap<String, String> hashColumns = new HashMap<String, String>();
+	private HashMap<String, String> hashColumns = new LinkedHashMap<String, String>();
 
 	/*	테이블 컬럼에 대응되는 멤버변수를 저장하는 Hashtable */
-	private HashMap<String, String> hashFields = new HashMap<String, String>();
+	private HashMap<String, String> hashFields = new LinkedHashMap<String, String>();
 	
-	public LogMgmtDtlVO() {}
+	public LogMgmtDetailVO() {}
 
-	public LogMgmtDtlVO(String ibflag, String pagerows, String intgCdId, String intgCdValCtnt, String intgCdValDpDesc, String intgCdValDesc, String intgCdValDpSeq, String aplyStDt, String aplyEndDt, String creUsrId, String creDt, String updUsrId, String updDt) {
+	public LogMgmtDetailVO(String ibflag, String pagerows, String updDt, String updUsrId, String creDt, String creUsrId, String aplyEndDt, String aplyStDt, String intgCdValDpSeq, String intgCdValDesc, String intgCdValDpDesc, String intgCdValCtnt, String intgCdId) {
 		this.updDt = updDt;
 		this.intgCdValDpSeq = intgCdValDpSeq;
 		this.intgCdValDpDesc = intgCdValDpDesc;
@@ -83,8 +64,8 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 		this.intgCdId = intgCdId;
 		this.aplyStDt = aplyStDt;
 		this.ibflag = ibflag;
-		this.intgCdValDesc = intgCdValDesc;
 		this.creUsrId = creUsrId;
+		this.intgCdValDesc = intgCdValDesc;
 		this.intgCdValCtnt = intgCdValCtnt;
 		this.updUsrId = updUsrId;
 	}
@@ -103,8 +84,8 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 		this.hashColumns.put("intg_cd_id", getIntgCdId());
 		this.hashColumns.put("aply_st_dt", getAplyStDt());
 		this.hashColumns.put("ibflag", getIbflag());
-		this.hashColumns.put("intg_cd_val_desc", getIntgCdValDesc());
 		this.hashColumns.put("cre_usr_id", getCreUsrId());
+		this.hashColumns.put("intg_cd_val_desc", getIntgCdValDesc());
 		this.hashColumns.put("intg_cd_val_ctnt", getIntgCdValCtnt());
 		this.hashColumns.put("upd_usr_id", getUpdUsrId());
 		return this.hashColumns;
@@ -124,8 +105,8 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 		this.hashFields.put("intg_cd_id", "intgCdId");
 		this.hashFields.put("aply_st_dt", "aplyStDt");
 		this.hashFields.put("ibflag", "ibflag");
-		this.hashFields.put("intg_cd_val_desc", "intgCdValDesc");
 		this.hashFields.put("cre_usr_id", "creUsrId");
+		this.hashFields.put("intg_cd_val_desc", "intgCdValDesc");
 		this.hashFields.put("intg_cd_val_ctnt", "intgCdValCtnt");
 		this.hashFields.put("upd_usr_id", "updUsrId");
 		return this.hashFields;
@@ -205,18 +186,18 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 	
 	/**
 	 * Column Info
-	 * @return intgCdValDesc
-	 */
-	public String getIntgCdValDesc() {
-		return this.intgCdValDesc;
-	}
-	
-	/**
-	 * Column Info
 	 * @return creUsrId
 	 */
 	public String getCreUsrId() {
 		return this.creUsrId;
+	}
+	
+	/**
+	 * Column Info
+	 * @return intgCdValDesc
+	 */
+	public String getIntgCdValDesc() {
+		return this.intgCdValDesc;
 	}
 	
 	/**
@@ -310,18 +291,18 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 	
 	/**
 	 * Column Info
-	 * @param intgCdValDesc
-	 */
-	public void setIntgCdValDesc(String intgCdValDesc) {
-		this.intgCdValDesc = intgCdValDesc;
-	}
-	
-	/**
-	 * Column Info
 	 * @param creUsrId
 	 */
 	public void setCreUsrId(String creUsrId) {
 		this.creUsrId = creUsrId;
+	}
+	
+	/**
+	 * Column Info
+	 * @param intgCdValDesc
+	 */
+	public void setIntgCdValDesc(String intgCdValDesc) {
+		this.intgCdValDesc = intgCdValDesc;
 	}
 	
 	/**
@@ -340,32 +321,40 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 		this.updUsrId = updUsrId;
 	}
 	
-	/**
+/**
 	 * Request 의 데이터를 추출하여 VO 의 멤버변수에 설정.
 	 * @param request
 	 */
 	public void fromRequest(HttpServletRequest request) {
-		setUpdDt(JSPUtil.getParameter(request, "upd_dt", ""));
-		setIntgCdValDpSeq(JSPUtil.getParameter(request, "intg_cd_val_dp_seq", ""));
-		setIntgCdValDpDesc(JSPUtil.getParameter(request, "intg_cd_val_dp_desc", ""));
-		setAplyEndDt(JSPUtil.getParameter(request, "aply_end_dt", ""));
-		setCreDt(JSPUtil.getParameter(request, "cre_dt", ""));
-		setPagerows(JSPUtil.getParameter(request, "pagerows", ""));
-		setIntgCdId(JSPUtil.getParameter(request, "intg_cd_id", ""));
-		setAplyStDt(JSPUtil.getParameter(request, "aply_st_dt", ""));
-		setIbflag(JSPUtil.getParameter(request, "ibflag", ""));
-		setIntgCdValDesc(JSPUtil.getParameter(request, "intg_cd_val_desc", ""));
-		setCreUsrId(JSPUtil.getParameter(request, "cre_usr_id", ""));
-		setIntgCdValCtnt(JSPUtil.getParameter(request, "intg_cd_val_ctnt", ""));
-		setUpdUsrId(JSPUtil.getParameter(request, "upd_usr_id", ""));
+		fromRequest(request,"");
+	}
+
+	/**
+	 * Request 의 데이터를 추출하여 VO 의 멤버변수에 설정.
+	 * @param request
+	 */
+	public void fromRequest(HttpServletRequest request, String prefix) {
+		setUpdDt(JSPUtil.getParameter(request, prefix + "upd_dt", ""));
+		setIntgCdValDpSeq(JSPUtil.getParameter(request, prefix + "intg_cd_val_dp_seq", ""));
+		setIntgCdValDpDesc(JSPUtil.getParameter(request, prefix + "intg_cd_val_dp_desc", ""));
+		setAplyEndDt(JSPUtil.getParameter(request, prefix + "aply_end_dt", ""));
+		setCreDt(JSPUtil.getParameter(request, prefix + "cre_dt", ""));
+		setPagerows(JSPUtil.getParameter(request, prefix + "pagerows", ""));
+		setIntgCdId(JSPUtil.getParameter(request, prefix + "intg_cd_id", ""));
+		setAplyStDt(JSPUtil.getParameter(request, prefix + "aply_st_dt", ""));
+		setIbflag(JSPUtil.getParameter(request, prefix + "ibflag", ""));
+		setCreUsrId(JSPUtil.getParameter(request, prefix + "cre_usr_id", ""));
+		setIntgCdValDesc(JSPUtil.getParameter(request, prefix + "intg_cd_val_desc", ""));
+		setIntgCdValCtnt(JSPUtil.getParameter(request, prefix + "intg_cd_val_ctnt", ""));
+		setUpdUsrId(JSPUtil.getParameter(request, prefix + "upd_usr_id", ""));
 	}
 
 	/**
 	 * Request 의 데이터를 VO 배열로 변환하여 반환.
 	 * @param request
-	 * @return LogMgmtDtlVO[]
+	 * @return LogMgmtDetailVO[]
 	 */
-	public LogMgmtDtlVO[] fromRequestGrid(HttpServletRequest request) {
+	public LogMgmtDetailVO[] fromRequestGrid(HttpServletRequest request) {
 		return fromRequestGrid(request, "");
 	}
 
@@ -373,10 +362,10 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 	 * Request 넘어온 여러 건 DATA를 VO Class 에 담는다. 
 	 * @param request
 	 * @param prefix
-	 * @return LogMgmtDtlVO[]
+	 * @return LogMgmtDetailVO[]
 	 */
-	public LogMgmtDtlVO[] fromRequestGrid(HttpServletRequest request, String prefix) {
-		LogMgmtDtlVO model = null;
+	public LogMgmtDetailVO[] fromRequestGrid(HttpServletRequest request, String prefix) {
+		LogMgmtDetailVO model = null;
 		
 		String[] tmp = request.getParameterValues(prefix + "ibflag");
   		if(tmp == null)
@@ -385,22 +374,22 @@ public class LogMgmtDtlVO extends AbstractValueObject {
   		int length = request.getParameterValues(prefix + "ibflag").length;
   
 		try {
-			String[] updDt = (JSPUtil.getParameter(request, prefix	+ "upd_dt".trim(), length));
-			String[] intgCdValDpSeq = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_dp_seq".trim(), length));
-			String[] intgCdValDpDesc = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_dp_desc".trim(), length));
-			String[] aplyEndDt = (JSPUtil.getParameter(request, prefix	+ "aply_end_dt".trim(), length));
-			String[] creDt = (JSPUtil.getParameter(request, prefix	+ "cre_dt".trim(), length));
-			String[] pagerows = (JSPUtil.getParameter(request, prefix	+ "pagerows".trim(), length));
-			String[] intgCdId = (JSPUtil.getParameter(request, prefix	+ "intg_cd_id".trim(), length));
-			String[] aplyStDt = (JSPUtil.getParameter(request, prefix	+ "aply_st_dt".trim(), length));
-			String[] ibflag = (JSPUtil.getParameter(request, prefix	+ "ibflag".trim(), length));
-			String[] intgCdValDesc = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_desc".trim(), length));
-			String[] creUsrId = (JSPUtil.getParameter(request, prefix	+ "cre_usr_id".trim(), length));
-			String[] intgCdValCtnt = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_ctnt".trim(), length));
-			String[] updUsrId = (JSPUtil.getParameter(request, prefix	+ "upd_usr_id".trim(), length));
+			String[] updDt = (JSPUtil.getParameter(request, prefix	+ "upd_dt", length));
+			String[] intgCdValDpSeq = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_dp_seq", length));
+			String[] intgCdValDpDesc = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_dp_desc", length));
+			String[] aplyEndDt = (JSPUtil.getParameter(request, prefix	+ "aply_end_dt", length));
+			String[] creDt = (JSPUtil.getParameter(request, prefix	+ "cre_dt", length));
+			String[] pagerows = (JSPUtil.getParameter(request, prefix	+ "pagerows", length));
+			String[] intgCdId = (JSPUtil.getParameter(request, prefix	+ "intg_cd_id", length));
+			String[] aplyStDt = (JSPUtil.getParameter(request, prefix	+ "aply_st_dt", length));
+			String[] ibflag = (JSPUtil.getParameter(request, prefix	+ "ibflag", length));
+			String[] creUsrId = (JSPUtil.getParameter(request, prefix	+ "cre_usr_id", length));
+			String[] intgCdValDesc = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_desc", length));
+			String[] intgCdValCtnt = (JSPUtil.getParameter(request, prefix	+ "intg_cd_val_ctnt", length));
+			String[] updUsrId = (JSPUtil.getParameter(request, prefix	+ "upd_usr_id", length));
 			
 			for (int i = 0; i < length; i++) {
-				model = new LogMgmtDtlVO();
+				model = new LogMgmtDetailVO();
 				if (updDt[i] != null)
 					model.setUpdDt(updDt[i]);
 				if (intgCdValDpSeq[i] != null)
@@ -419,10 +408,10 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 					model.setAplyStDt(aplyStDt[i]);
 				if (ibflag[i] != null)
 					model.setIbflag(ibflag[i]);
-				if (intgCdValDesc[i] != null)
-					model.setIntgCdValDesc(intgCdValDesc[i]);
 				if (creUsrId[i] != null)
 					model.setCreUsrId(creUsrId[i]);
+				if (intgCdValDesc[i] != null)
+					model.setIntgCdValDesc(intgCdValDesc[i]);
 				if (intgCdValCtnt[i] != null)
 					model.setIntgCdValCtnt(intgCdValCtnt[i]);
 				if (updUsrId[i] != null)
@@ -433,15 +422,15 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 		} catch (Exception e) {
 			return null;
 		}
-		return getLogMgmtDtlVOs();
+		return getLogMgmtDetailVOs();
 	}
 
 	/**
 	 * VO 배열을 반환
-	 * @return LogMgmtDtlVO[]
+	 * @return LogMgmtDetailVO[]
 	 */
-	public LogMgmtDtlVO[] getLogMgmtDtlVOs(){
-		LogMgmtDtlVO[] vos = (LogMgmtDtlVO[])models.toArray(new LogMgmtDtlVO[models.size()]);
+	public LogMgmtDetailVO[] getLogMgmtDetailVOs(){
+		LogMgmtDetailVO[] vos = (LogMgmtDetailVO[])models.toArray(new LogMgmtDetailVO[models.size()]);
 		return vos;
 	}
 	
@@ -449,42 +438,8 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 	 * VO Class의 내용을 String으로 변환
 	 */
 	public String toString() {
-		StringBuffer ret = new StringBuffer();
-		Field[] field = this.getClass().getDeclaredFields();
-		String space = "";
-		try{
-			for(int i = 0; i < field.length; i++){
-				String[] arr = null;
-				arr = getField(field, i);
-				if(arr != null){
-					for(int j = 0; j < arr.length; j++) {
-						ret.append(field[i].getName().concat(space).substring(0, 30).concat("= ") + arr[j] + "\n");
-					}
-				} else {
-					ret.append(field[i].getName() + " =  null \n");
-				}
-			}
-		} catch (Exception ex) {
-			return null;
-		}
-		return ret.toString();
-	}
-	
-	/**
-	 * 필드에 있는 값을 스트링 배열로 반환.
-	 * @param field
-	 * @param i
-	 * @return String[]
-	 */
-	private String[] getField(Field[] field, int i) {
-		String[] arr = null;
-		try{
-			arr = (String[]) field[i].get(this);
-		}catch(Exception ex){
-			arr = null;
-		}
-		return arr;
-	}
+		   return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE );
+	   }
 
 	/**
 	* 포맷팅된 문자열에서 특수문자 제거("-","/",",",":")
@@ -499,8 +454,8 @@ public class LogMgmtDtlVO extends AbstractValueObject {
 		this.intgCdId = this.intgCdId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.aplyStDt = this.aplyStDt .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.ibflag = this.ibflag .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
-		this.intgCdValDesc = this.intgCdValDesc .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.creUsrId = this.creUsrId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
+		this.intgCdValDesc = this.intgCdValDesc .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.intgCdValCtnt = this.intgCdValCtnt .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.updUsrId = this.updUsrId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 	}

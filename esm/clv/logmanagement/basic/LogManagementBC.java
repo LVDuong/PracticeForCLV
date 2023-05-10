@@ -1,91 +1,56 @@
 /*=========================================================
-*Copyright(c) 2006 CyberLogitec
-*@FileName : CodepublishBC.java
-*@FileTitle : 공통코드관리
+*Copyright(c) 2023 CyberLogitec
+*@FileName : LogManagementBC.java
+*@FileTitle : Interface Log Management
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2006-09-07
-*@LastModifier : SeongWook Kim
+*@LastModifyDate : 2023-05-05
+*@LastModifier : 
 *@LastVersion : 1.0
-* 2006-09-07 SeongWook Kim
-* 1.0 최초 생성
+* 2023-05-05
+* 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.logmanagement.basic;
 
-import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtDtlVO;
-import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtMstVO;
-import com.clt.framework.component.rowset.DBRowSet;
-import com.clt.framework.core.layer.event.Event;
+import java.util.List;
+
+import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtDetailVO;
+import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtVO;
 import com.clt.framework.core.layer.event.EventException;
 import com.clt.framework.support.view.signon.SignOnUserAccount;
 
-/**
- * edm-edm Business Logic Command Interface<br>
- * - edm-edm에 대한 비지니스 로직에 대한 인터페이스<br>
- *
- * @author SeongWook Kim
- * @see LogManagementEventResponse 참조
- * @since J2EE 1.4
- */
 public interface LogManagementBC  {
 	
 	/**
-	 * 조회 이벤트 처리<br>
-	 * 화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @return String[]
-	 * @exception EventException
+	 * This method is used to search
+	 * @param logMgmtVO
+	 * @return List of results
+	 * @throws EventException
 	 */
-	public String[] searchSubSystemCodeList() throws EventException ;
+	public List<LogMgmtVO> searchLogMgmtVO(LogMgmtVO logMgmtVO) throws EventException;
 	
 	/**
-	 * 조회 이벤트 처리<br>
-	 * 화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @return String
-	 * @exception EventException
+	 * This method is used to search data
+	 * @param logMgmtDetailVO
+	 * @return List of results
+	 * @throws EventException
 	 */
-//	public String searchMaxIntgCdId() throws EventException ;
-
-	/**
-	 * 멀티 이벤트 처리<br>
-	 * UI_COM_EDM_001 화면에 대한 멀티 이벤트 처리<br>
-	 * 
-	 * @param LogMgmtMstVO[] logMgmtMstVOs
-	 * @param SignOnUserAccount a
-	 * @exception EventException
-	 */
-	public void multiLogMgmtMst(LogMgmtMstVO[] logMgmtMstVOs, SignOnUserAccount a) throws EventException;
+	public List<LogMgmtDetailVO> searchLogMgmtDetailVO(LogMgmtDetailVO logMgmtDetailVO) throws EventException;
 	
 	/**
-	 * 멀티 이벤트 처리<br>
-	 * UI_COM_EDM_001 화면에 대한 멀티 이벤트 처리<br>
-	 * 
-	 * @param LogMgmtDtlVO[] logMgmtDtlVOs
-	 * @param SignOnUserAccount a
-	 * @exception EventException
+	 * This method is used to save data
+	 * @param logMgmtVO
+	 * @param account
+	 * @throws EventException
 	 */
-	public void multiLogMgmtDtl(LogMgmtDtlVO[] logMgmtDtlVOs, SignOnUserAccount a) throws EventException;
+	public void manageLogMgmtVO(LogMgmtVO[] logMgmtVO,SignOnUserAccount account) throws EventException;
 	
 	/**
-	 * 조회 이벤트 처리<br>
-	 * Codepublish화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @param Event e
-	 * @return DBRowSet
-	 * @exception EventException
+	 * This method is used to save data
+	 * @param logMgmtDetailVO
+	 * @param account
+	 * @throws EventException
 	 */
-	public DBRowSet searchAPPCodeList(Event e) throws EventException;
-
-	/**
-	 * 조회 이벤트 처리<br>
-	 * Codepublish화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @param Event e
-	 * @return DBRowSet
-	 * @exception EventException
-	 */
-	public DBRowSet searchAPPCodeDetailList(Event e) throws EventException;
-
-
+	public void manageLogMgmtDetailVO(LogMgmtDetailVO[] logMgmtDetailVO,SignOnUserAccount account) throws EventException;
+	
 }

@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2023.05.05
+*@LastModifyDate : 2023.05.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2023.05.05 
+* 2023.05.10 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.logmanagement.integration;
@@ -34,7 +34,7 @@ public class LogManagementDBDAOComIntgCdDtlDSQL implements ISQLTemplate{
 	
 	/**
 	  * <pre>
-	  * LogManagementDBDAOComIntgCdDtlDSQL
+	  * LogManagementDAOLogDtlDSQL
 	  * </pre>
 	  */
 	public LogManagementDBDAOComIntgCdDtlDSQL(){
@@ -49,15 +49,8 @@ public class LogManagementDBDAOComIntgCdDtlDSQL implements ISQLTemplate{
 		}
 		params.put("intg_cd_val_ctnt",new String[]{arrTmp[0],arrTmp[1]});
 
-		tmp = java.sql.Types.VARCHAR + ",N";
-		arrTmp = tmp.split(",");
-		if(arrTmp.length !=2){
-			throw new IllegalArgumentException();
-		}
-		params.put("intg_cd_id",new String[]{arrTmp[0],arrTmp[1]});
-
 		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.logmanagement.integration ").append("\n"); 
+		query.append("Path : com.clt.apps.opus.esm.clv.logmanagement.integration").append("\n"); 
 		query.append("FileName : LogManagementDBDAOComIntgCdDtlDSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
@@ -74,10 +67,9 @@ public class LogManagementDBDAOComIntgCdDtlDSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("DELETE" ).append("\n"); 
+		query.append("DELETE " ).append("\n"); 
 		query.append("FROM COM_INTG_CD_DTL" ).append("\n"); 
-		query.append("WHERE INTG_CD_ID = @[intg_cd_id]" ).append("\n"); 
-		query.append("AND   INTG_CD_VAL_CTNT = NVL2(@[intg_cd_val_ctnt],@[intg_cd_val_ctnt],INTG_CD_VAL_CTNT)" ).append("\n"); 
+		query.append("WHERE	INTG_CD_VAL_CTNT = @[intg_cd_val_ctnt]" ).append("\n"); 
 
 	}
 }

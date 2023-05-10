@@ -2,7 +2,7 @@
 <sqls>
 	<querys>
 		<query name="LogManagementDBDAOComIntgCdDSQL">
-			<desc><![CDATA[LogManagementDBDAOComIntgCdDSQL]]></desc>
+			<desc><![CDATA[LogManagementDAOLogDSQL]]></desc>
 			<sql><![CDATA[
 DELETE
 FROM COM_INTG_CD

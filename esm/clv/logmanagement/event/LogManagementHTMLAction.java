@@ -1,10 +1,22 @@
+/*=========================================================
+*Copyright(c) 2023 CyberLogitec
+*@FileName : LogManagementHTMLAction.java
+*@FileTitle : Error Message Management
+*Open Issues :
+*Change history :
+*@LastModifyDate : 2023-05-05
+*@LastModifier : 
+*@LastVersion : 1.0
+* 2023-05-05 
+* 1.0 Creation
+=========================================================*/
 package com.clt.apps.opus.esm.clv.logmanagement.event;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtCondVO;
-import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtDtlVO;
-import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtMstVO;
+import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtDetailVO;
+import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtVO;
+import com.clt.framework.component.util.JSPUtil;
 import com.clt.framework.core.controller.html.HTMLActionException;
 import com.clt.framework.core.layer.event.Event;
 import com.clt.framework.core.layer.event.EventResponse;
@@ -13,11 +25,13 @@ import com.clt.framework.support.controller.html.FormCommand;
 
 public class LogManagementHTMLAction extends HTMLActionSupport{
 	
+	//The serialVersionUID attribute is an identifier that is used to serialize/deserialize an object
+	private static final long serialVersionUID = 1L;
+		
 	/**
 	 * LogManagementHTMLAction 객체를 생성
 	 */
-	public LogManagementHTMLAction() {
-	}
+	public LogManagementHTMLAction() {}
 	
 	/**
 	 * HTML DOM 객체의 Value를 자바 변수로 Parsing<br>
@@ -29,16 +43,33 @@ public class LogManagementHTMLAction extends HTMLActionSupport{
 	 */
 	public Event perform(HttpServletRequest request) throws HTMLActionException {
 		
+		//Get f_command
 		FormCommand command = FormCommand.fromRequest(request);
+		
     	LogManagementEvent event = new LogManagementEvent();
 		
 		if(command.isCommand(FormCommand.SEARCH01)) {
-			event.setLogMgmtCondVO((LogMgmtCondVO)getVO(request, LogMgmtCondVO .class));
+			//Create LogMgmtVO object
+			LogMgmtVO logMgmtVO = new LogMgmtVO();
+			
+			//set parameter has name s_intg_cd_id for logMgmtVO
+			logMgmtVO.setIntgCdId(JSPUtil.getParameter(request, "s_intg_cd_id",""));
+			//set parameter has name s_ownr_sub_sys_cd for logMgmtVO
+			logMgmtVO.setOwnrSubSysCd(JSPUtil.getParameter(request, "s_ownr_sub_sys_cd",""));
+			//set VO for event
+			event.setLogMgmtVO(logMgmtVO);
 		}else if(command.isCommand(FormCommand.SEARCH02)) {
-			event.setLogMgmtCondVO((LogMgmtCondVO)getVO(request, LogMgmtCondVO .class));
+			LogMgmtDetailVO logMgmtDetailVO = new LogMgmtDetailVO();
+			
+			//set parameter has name s_intg_cd_id for logMgmtVO
+			logMgmtDetailVO.setIntgCdId(JSPUtil.getParameter(request, "s_intg_cd_id",""));
+			//set VO for event
+			event.setLogMgmtDetailVO(logMgmtDetailVO);
 		}else if(command.isCommand(FormCommand.MULTI)) { 
-			event.setLogMgmtMstVOs((LogMgmtMstVO[])getVOs(request, LogMgmtMstVO .class, "sheet1_"));
-			event.setLogMgmtDtlVOs((LogMgmtDtlVO[])getVOs(request, LogMgmtDtlVO .class, "sheet2_"));
+//			event.setLogMgmtVOs((LogMgmtVO[])getVOs(request, LogMgmtVO.class,""));
+			event.setLogMgmtVOs((LogMgmtVO[])getVOs(request, LogMgmtVO .class, "sheet1_"));
+		}else if(command.isCommand(FormCommand.MULTI01)) {
+			event.setLogMgmtDetailVOs((LogMgmtDetailVO[])getVOs(request, LogMgmtDetailVO.class,"sheet2_"));
 		}	
 		
 		return event;
@@ -53,6 +84,7 @@ public class LogManagementHTMLAction extends HTMLActionSupport{
 	 * @param eventResponse EventResponse interface를 구현한 객체
 	 */
 	public void doEnd(HttpServletRequest request, EventResponse eventResponse) {
+		//set attribute has key Event for request
 		request.setAttribute("EventResponse", eventResponse);
 	}
 
@@ -64,6 +96,7 @@ public class LogManagementHTMLAction extends HTMLActionSupport{
 	 * @param event Event interface를 구현한 객체
 	 */
 	public void doEnd(HttpServletRequest request, Event event) {
+		//set attribute has key Event for request
 		request.setAttribute("Event", event);
 	}
 }

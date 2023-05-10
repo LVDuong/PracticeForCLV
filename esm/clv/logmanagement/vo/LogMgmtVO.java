@@ -1,19 +1,5 @@
-/*=========================================================
-*Copyright(c) 2023 CyberLogitec
-*@FileName : ComIntgCdVO.java
-*@FileTitle : ComIntgCdVO
-*Open Issues :
-*Change history :
-*@LastModifyDate : 2023.05.05
-*@LastModifier : 
-*@LastVersion : 1.0
-* 2023.05.05  
-* 1.0 Creation
-=========================================================*/
-
 package com.clt.apps.opus.esm.clv.logmanagement.vo;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,20 +13,11 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import com.clt.framework.component.common.AbstractValueObject;
 import com.clt.framework.component.util.JSPUtil;
 
-/**
- * Table Value Ojbect<br>
- * 관련 Event 에서 생성, 서버실행요청시 Data 전달역할을 수행하는 Value Object
- *
- * @author 
- * @since J2EE 1.6
- * @see AbstractValueObject
- */
+public class LogMgmtVO extends AbstractValueObject {
 
-public class ComIntgCdVO extends AbstractValueObject {
-
-	private static final long serialVersionUID = 1L;
+private static final long serialVersionUID = 1L;
 	
-	private Collection<ComIntgCdVO> models = new ArrayList<ComIntgCdVO>();
+	private Collection<LogMgmtVO> models = new ArrayList<LogMgmtVO>();
 	
 	/* Column Info */
 	private String updDt = null;
@@ -63,11 +40,13 @@ public class ComIntgCdVO extends AbstractValueObject {
 	/* VO Data Value( C:Creation, U:Update, D:Delete ) */
 	private String ibflag = null;
 	/* Column Info */
-	private String intgCdUseFlg = null;
-	/* Column Info */
 	private String creUsrId = null;
 	/* Column Info */
+	private String intgCdUseFlg = null;
+	/* Column Info */
 	private String intgCdNm = null;
+	/* Column Info */
+	private String intgCdDatTpNm = null;
 	/* Column Info */
 	private String updUsrId = null;
 
@@ -77,9 +56,9 @@ public class ComIntgCdVO extends AbstractValueObject {
 	/*	테이블 컬럼에 대응되는 멤버변수를 저장하는 Hashtable */
 	private HashMap<String, String> hashFields = new LinkedHashMap<String, String>();
 	
-	public ComIntgCdVO() {}
+	public LogMgmtVO() {}
 
-	public ComIntgCdVO(String ibflag, String pagerows, String ownrSubSysCd, String intgCdId, String intgCdNm, String intgCdDesc, String intgCdTpCd, String mngTblNm, String intgCdLen, String intgCdUseFlg, String creUsrId, String creDt, String updUsrId, String updDt) {
+	public LogMgmtVO(String ibflag, String pagerows, String updDt, String updUsrId, String creDt, String creUsrId, String intgCdUseFlg, String mngTblNm, String ownrSubSysCd, String intgCdLen, String intgCdDatTpNm, String intgCdTpCd, String intgCdDesc, String intgCdNm, String intgCdId) {
 		this.updDt = updDt;
 		this.intgCdLen = intgCdLen;
 		this.intgCdDesc = intgCdDesc;
@@ -90,9 +69,10 @@ public class ComIntgCdVO extends AbstractValueObject {
 		this.pagerows = pagerows;
 		this.intgCdId = intgCdId;
 		this.ibflag = ibflag;
-		this.intgCdUseFlg = intgCdUseFlg;
 		this.creUsrId = creUsrId;
+		this.intgCdUseFlg = intgCdUseFlg;
 		this.intgCdNm = intgCdNm;
+		this.intgCdDatTpNm = intgCdDatTpNm;
 		this.updUsrId = updUsrId;
 	}
 	
@@ -111,9 +91,10 @@ public class ComIntgCdVO extends AbstractValueObject {
 		this.hashColumns.put("pagerows", getPagerows());
 		this.hashColumns.put("intg_cd_id", getIntgCdId());
 		this.hashColumns.put("ibflag", getIbflag());
-		this.hashColumns.put("intg_cd_use_flg", getIntgCdUseFlg());
 		this.hashColumns.put("cre_usr_id", getCreUsrId());
+		this.hashColumns.put("intg_cd_use_flg", getIntgCdUseFlg());
 		this.hashColumns.put("intg_cd_nm", getIntgCdNm());
+		this.hashColumns.put("intg_cd_dat_tp_nm", getIntgCdDatTpNm());
 		this.hashColumns.put("upd_usr_id", getUpdUsrId());
 		return this.hashColumns;
 	}
@@ -133,9 +114,10 @@ public class ComIntgCdVO extends AbstractValueObject {
 		this.hashFields.put("pagerows", "pagerows");
 		this.hashFields.put("intg_cd_id", "intgCdId");
 		this.hashFields.put("ibflag", "ibflag");
-		this.hashFields.put("intg_cd_use_flg", "intgCdUseFlg");
 		this.hashFields.put("cre_usr_id", "creUsrId");
+		this.hashFields.put("intg_cd_use_flg", "intgCdUseFlg");
 		this.hashFields.put("intg_cd_nm", "intgCdNm");
+		this.hashFields.put("intg_cd_dat_tp_nm", "intgCdDatTpNm");
 		this.hashFields.put("upd_usr_id", "updUsrId");
 		return this.hashFields;
 	}
@@ -222,14 +204,6 @@ public class ComIntgCdVO extends AbstractValueObject {
 	
 	/**
 	 * Column Info
-	 * @return intgCdUseFlg
-	 */
-	public String getIntgCdUseFlg() {
-		return this.intgCdUseFlg;
-	}
-	
-	/**
-	 * Column Info
 	 * @return creUsrId
 	 */
 	public String getCreUsrId() {
@@ -238,10 +212,26 @@ public class ComIntgCdVO extends AbstractValueObject {
 	
 	/**
 	 * Column Info
+	 * @return intgCdUseFlg
+	 */
+	public String getIntgCdUseFlg() {
+		return this.intgCdUseFlg;
+	}
+	
+	/**
+	 * Column Info
 	 * @return intgCdNm
 	 */
 	public String getIntgCdNm() {
 		return this.intgCdNm;
+	}
+	
+	/**
+	 * Column Info
+	 * @return intgCdDatTpNm
+	 */
+	public String getIntgCdDatTpNm() {
+		return this.intgCdDatTpNm;
 	}
 	
 	/**
@@ -335,14 +325,6 @@ public class ComIntgCdVO extends AbstractValueObject {
 	
 	/**
 	 * Column Info
-	 * @param intgCdUseFlg
-	 */
-	public void setIntgCdUseFlg(String intgCdUseFlg) {
-		this.intgCdUseFlg = intgCdUseFlg;
-	}
-	
-	/**
-	 * Column Info
 	 * @param creUsrId
 	 */
 	public void setCreUsrId(String creUsrId) {
@@ -351,10 +333,26 @@ public class ComIntgCdVO extends AbstractValueObject {
 	
 	/**
 	 * Column Info
+	 * @param intgCdUseFlg
+	 */
+	public void setIntgCdUseFlg(String intgCdUseFlg) {
+		this.intgCdUseFlg = intgCdUseFlg;
+	}
+	
+	/**
+	 * Column Info
 	 * @param intgCdNm
 	 */
 	public void setIntgCdNm(String intgCdNm) {
 		this.intgCdNm = intgCdNm;
+	}
+	
+	/**
+	 * Column Info
+	 * @param intgCdDatTpNm
+	 */
+	public void setIntgCdDatTpNm(String intgCdDatTpNm) {
+		this.intgCdDatTpNm = intgCdDatTpNm;
 	}
 	
 	/**
@@ -388,18 +386,19 @@ public class ComIntgCdVO extends AbstractValueObject {
 		setPagerows(JSPUtil.getParameter(request, prefix + "pagerows", ""));
 		setIntgCdId(JSPUtil.getParameter(request, prefix + "intg_cd_id", ""));
 		setIbflag(JSPUtil.getParameter(request, prefix + "ibflag", ""));
-		setIntgCdUseFlg(JSPUtil.getParameter(request, prefix + "intg_cd_use_flg", ""));
 		setCreUsrId(JSPUtil.getParameter(request, prefix + "cre_usr_id", ""));
+		setIntgCdUseFlg(JSPUtil.getParameter(request, prefix + "intg_cd_use_flg", ""));
 		setIntgCdNm(JSPUtil.getParameter(request, prefix + "intg_cd_nm", ""));
+		setIntgCdDatTpNm(JSPUtil.getParameter(request, prefix + "intg_cd_dat_tp_nm", ""));
 		setUpdUsrId(JSPUtil.getParameter(request, prefix + "upd_usr_id", ""));
 	}
 
 	/**
 	 * Request 의 데이터를 VO 배열로 변환하여 반환.
 	 * @param request
-	 * @return ComIntgCdVO[]
+	 * @return LogMgmtVO[]
 	 */
-	public ComIntgCdVO[] fromRequestGrid(HttpServletRequest request) {
+	public LogMgmtVO[] fromRequestGrid(HttpServletRequest request) {
 		return fromRequestGrid(request, "");
 	}
 
@@ -407,10 +406,10 @@ public class ComIntgCdVO extends AbstractValueObject {
 	 * Request 넘어온 여러 건 DATA를 VO Class 에 담는다. 
 	 * @param request
 	 * @param prefix
-	 * @return ComIntgCdVO[]
+	 * @return LogMgmtVO[]
 	 */
-	public ComIntgCdVO[] fromRequestGrid(HttpServletRequest request, String prefix) {
-		ComIntgCdVO model = null;
+	public LogMgmtVO[] fromRequestGrid(HttpServletRequest request, String prefix) {
+		LogMgmtVO model = null;
 		
 		String[] tmp = request.getParameterValues(prefix + "ibflag");
   		if(tmp == null)
@@ -429,13 +428,14 @@ public class ComIntgCdVO extends AbstractValueObject {
 			String[] pagerows = (JSPUtil.getParameter(request, prefix	+ "pagerows", length));
 			String[] intgCdId = (JSPUtil.getParameter(request, prefix	+ "intg_cd_id", length));
 			String[] ibflag = (JSPUtil.getParameter(request, prefix	+ "ibflag", length));
-			String[] intgCdUseFlg = (JSPUtil.getParameter(request, prefix	+ "intg_cd_use_flg", length));
 			String[] creUsrId = (JSPUtil.getParameter(request, prefix	+ "cre_usr_id", length));
+			String[] intgCdUseFlg = (JSPUtil.getParameter(request, prefix	+ "intg_cd_use_flg", length));
 			String[] intgCdNm = (JSPUtil.getParameter(request, prefix	+ "intg_cd_nm", length));
+			String[] intgCdDatTpNm = (JSPUtil.getParameter(request, prefix	+ "intg_cd_dat_tp_nm", length));
 			String[] updUsrId = (JSPUtil.getParameter(request, prefix	+ "upd_usr_id", length));
 			
 			for (int i = 0; i < length; i++) {
-				model = new ComIntgCdVO();
+				model = new LogMgmtVO();
 				if (updDt[i] != null)
 					model.setUpdDt(updDt[i]);
 				if (intgCdLen[i] != null)
@@ -456,12 +456,14 @@ public class ComIntgCdVO extends AbstractValueObject {
 					model.setIntgCdId(intgCdId[i]);
 				if (ibflag[i] != null)
 					model.setIbflag(ibflag[i]);
-				if (intgCdUseFlg[i] != null)
-					model.setIntgCdUseFlg(intgCdUseFlg[i]);
 				if (creUsrId[i] != null)
 					model.setCreUsrId(creUsrId[i]);
+				if (intgCdUseFlg[i] != null)
+					model.setIntgCdUseFlg(intgCdUseFlg[i]);
 				if (intgCdNm[i] != null)
 					model.setIntgCdNm(intgCdNm[i]);
+				if (intgCdDatTpNm[i] != null)
+					model.setIntgCdDatTpNm(intgCdDatTpNm[i]);
 				if (updUsrId[i] != null)
 					model.setUpdUsrId(updUsrId[i]);
 				models.add(model);
@@ -470,15 +472,15 @@ public class ComIntgCdVO extends AbstractValueObject {
 		} catch (Exception e) {
 			return null;
 		}
-		return getComIntgCdVOs();
+		return getLogMgmtVOs();
 	}
 
 	/**
 	 * VO 배열을 반환
-	 * @return ComIntgCdVO[]
+	 * @return LogMgmtVO[]
 	 */
-	public ComIntgCdVO[] getComIntgCdVOs(){
-		ComIntgCdVO[] vos = (ComIntgCdVO[])models.toArray(new ComIntgCdVO[models.size()]);
+	public LogMgmtVO[] getLogMgmtVOs(){
+		LogMgmtVO[] vos = (LogMgmtVO[])models.toArray(new LogMgmtVO[models.size()]);
 		return vos;
 	}
 	
@@ -503,9 +505,10 @@ public class ComIntgCdVO extends AbstractValueObject {
 		this.pagerows = this.pagerows .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.intgCdId = this.intgCdId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.ibflag = this.ibflag .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
-		this.intgCdUseFlg = this.intgCdUseFlg .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.creUsrId = this.creUsrId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
+		this.intgCdUseFlg = this.intgCdUseFlg .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.intgCdNm = this.intgCdNm .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
+		this.intgCdDatTpNm = this.intgCdDatTpNm .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 		this.updUsrId = this.updUsrId .replaceAll(",", "").replaceAll("-", "").replaceAll("/", "").replaceAll(":", "");
 	}
 }

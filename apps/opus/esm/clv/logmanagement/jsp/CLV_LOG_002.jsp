@@ -2,7 +2,7 @@
 /*=========================================================
 *Copyright(c) 2023 CyberLogitec. All Rights Reserved.
 *@FileName 	 : CLV_LOG_002.jsp
-*@FileTitle  : 공통코드관리
+*@FileTitle  : Log Message Management
 *@author     : CLT
 *@version    : 1.0
 *@since      : 2023/05/05
@@ -61,7 +61,7 @@
 
 <!-- page_title_area(S) -->
 <div class="page_title_area clear">
-	
+
 	<!-- page_title(S) -->
 	<h2 class="page_title"><button type="button"><span id="title"></span></button></h2>
 	<!-- page_title(E) -->
@@ -75,7 +75,6 @@
 
    	<!-- page_location(S) -->
    	<div class="location">
-		<!-- location 내용 동적생성 (별도 코딩 불필요) -->
         <span id="navigation"></span>
    	</div>
    	<!-- page_location(E) -->
@@ -86,20 +85,11 @@
 	<div class="opus_design_inquiry wFit">   <!-- no TAB  -->
 		<table class="search" border="0" style="width: 100%;">
 			<tr class="h23">
-<!-- 				<th width="70">Code Type</th> -->
-<!-- 				<td width="90"><select name="searchCdTp" style="width: 80;"> -->
-<!-- 					<option value="" selected></option> -->
-<!-- 					<option value="단일코드">단일코드</option> -->
-<!-- 					<option value="목록코드">목록코드</option> -->
-<!-- 				</select></td> -->
 				<th width="70">Subsystem</th>
-				<!-- td width="130"><input name="subsystem" type="text" style="width: 100" onKeyPress="javascript:ComKeyOnlyAlphabet('uppernum');"></td-->
+				<td width="120"><input type="text" style="width:100px;" class="input" value="" name="s_ownr_sub_sys_cd" id="s_ownr_sub_sys_cd"></td>
 				<td><script language="javascript">ComComboObject('subsystem', 1, 120, 0);</script></td>
-				<td width="90"><select name="searchtype" style="width: 80;">
-					<option value="0" selected>Cd ID</option>
-					<option value="1">Cd Name</option>
-				</select></td>
-				<td><input type="text" name="code_val" style="width: 150" value=""></td>
+				<th width="45">Cd ID</th>
+                <td><input type="text" style="width:100px;" class="input" value="" name="s_intg_cd_id" id="s_intg_cd_id"></td>
 			</tr>
 		</table>
 	</div>

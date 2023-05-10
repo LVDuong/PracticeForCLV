@@ -1,13 +1,13 @@
 /*=========================================================
 *Copyright(c) 2023 CyberLogitec
-*@FileName : LogManagementDBDAOmodifyCodeMgmtDtlUSQL.java
+*@FileName : LogManagementDBDAOComIntgCdDtlUSQL.java
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2023.05.05
+*@LastModifyDate : 2023.05.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2023.05.05 
+* 2023.05.10 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.logmanagement.integration;
@@ -23,7 +23,7 @@ import com.clt.framework.support.db.ISQLTemplate;
  * @since J2EE 1.6
  */
 
-public class LogManagementDBDAOmodifyCodeMgmtDtlUSQL implements ISQLTemplate{
+public class LogManagementDBDAOComIntgCdDtlUSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
 	
@@ -34,10 +34,10 @@ public class LogManagementDBDAOmodifyCodeMgmtDtlUSQL implements ISQLTemplate{
 	
 	/**
 	  * <pre>
-	  * LogManagementDBDAOmodifyCodeMgmtDtlUSQL
+	  * LogManagementDAOLogDtlUSQL
 	  * </pre>
 	  */
-	public LogManagementDBDAOmodifyCodeMgmtDtlUSQL(){
+	public LogManagementDBDAOComIntgCdDtlUSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
 		String tmp = null;
@@ -86,7 +86,7 @@ public class LogManagementDBDAOmodifyCodeMgmtDtlUSQL implements ISQLTemplate{
 
 		query.append("/*").append("\n"); 
 		query.append("Path : com.clt.apps.opus.esm.clv.logmanagement.integration ").append("\n"); 
-		query.append("FileName : LogManagementDBDAOmodifyCodeMgmtDtlUSQL").append("\n"); 
+		query.append("FileName : LogManagementDBDAOComIntgCdDtlUSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
 	
@@ -102,14 +102,14 @@ public class LogManagementDBDAOmodifyCodeMgmtDtlUSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("UPDATE COM_INTG_CD_DTL" ).append("\n"); 
-		query.append("   SET INTG_CD_VAL_DP_DESC  = @[intg_cd_val_dp_desc]" ).append("\n"); 
-		query.append("      ,INTG_CD_VAL_DESC    	= @[intg_cd_val_desc]" ).append("\n"); 
-		query.append("      ,INTG_CD_VAL_DP_SEQ   = @[intg_cd_val_dp_seq]" ).append("\n"); 
-		query.append("      ,UPD_USR_ID   		= @[upd_usr_id]" ).append("\n"); 
-		query.append("      ,UPD_DT       		= SYSDATE" ).append("\n"); 
-		query.append(" WHERE INTG_CD_ID = @[intg_cd_id]" ).append("\n"); 
-		query.append("	AND INTG_CD_VAL_CTNT = @[intg_cd_val_ctnt]" ).append("\n"); 
+		query.append("update com_intg_cd_dtl set " ).append("\n"); 
+		query.append("	intg_cd_val_dp_desc = @[intg_cd_val_dp_desc]," ).append("\n"); 
+		query.append("    intg_cd_val_desc = @[intg_cd_val_desc]," ).append("\n"); 
+		query.append("    intg_cd_val_dp_seq = @[intg_cd_val_dp_seq]," ).append("\n"); 
+		query.append("    upd_usr_id = @[upd_usr_id]," ).append("\n"); 
+		query.append("    upd_dt = sysdate" ).append("\n"); 
+		query.append("where intg_cd_id = @[intg_cd_id]" ).append("\n"); 
+		query.append("and intg_cd_val_ctnt = @[intg_cd_val_ctnt]" ).append("\n"); 
 
 	}
 }

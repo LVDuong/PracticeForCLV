@@ -4,13 +4,13 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2023.05.05
+*@LastModifyDate : 2023.05.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2023.05.05 
+* 2023.05.10 
 * 1.0 Creation
 =========================================================*/
-package com.clt.apps.opus.esm.clv.logmanagement.integration;
+package com.clt.apps.opus.esm.clv.logmanagement.integration ;
 
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -34,7 +34,7 @@ public class LogManagementDBDAOComIntgCdCSQL implements ISQLTemplate{
 	
 	/**
 	  * <pre>
-	  * LogManagementDBDAOComIntgCdCSQL
+	  * LogManagementDAOLogVOCSQL
 	  * </pre>
 	  */
 	public LogManagementDBDAOComIntgCdCSQL(){
@@ -48,6 +48,13 @@ public class LogManagementDBDAOComIntgCdCSQL implements ISQLTemplate{
 			throw new IllegalArgumentException();
 		}
 		params.put("intg_cd_desc",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("mng_tbl_nm",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
@@ -124,13 +131,34 @@ public class LogManagementDBDAOComIntgCdCSQL implements ISQLTemplate{
 	 */
 	public void setQuery(){
 		query.append("INSERT INTO COM_INTG_CD (" ).append("\n"); 
-		query.append("INTG_CD_ID, INTG_CD_NM, INTG_CD_DESC," ).append("\n"); 
-		query.append("INTG_CD_TP_CD, INTG_CD_DAT_TP_NM, INTG_CD_LEN," ).append("\n"); 
-		query.append("OWNR_SUB_SYS_CD, MNG_TBL_NM, INTG_CD_USE_FLG," ).append("\n"); 
-		query.append("CRE_USR_ID, CRE_DT, UPD_USR_ID, UPD_DT)" ).append("\n"); 
-		query.append("VALUES(@[intg_cd_id], @[intg_cd_nm], @[intg_cd_desc], @[intg_cd_tp_cd]," ).append("\n"); 
-		query.append("'VARCHAR2', @[intg_cd_len], @[ownr_sub_sys_cd], '', @[intg_cd_use_flg], " ).append("\n"); 
-		query.append("@[cre_usr_id], SYSDATE, @[upd_usr_id], SYSDATE)" ).append("\n"); 
+		query.append("	intg_cd_id," ).append("\n"); 
+		query.append("    intg_cd_nm," ).append("\n"); 
+		query.append("    intg_cd_desc," ).append("\n"); 
+		query.append("    intg_cd_tp_cd," ).append("\n"); 
+		query.append("    intg_cd_dat_tp_nm," ).append("\n"); 
+		query.append("    intg_cd_len," ).append("\n"); 
+		query.append("    ownr_sub_sys_cd," ).append("\n"); 
+		query.append("    mng_tbl_nm," ).append("\n"); 
+		query.append("    intg_cd_use_flg," ).append("\n"); 
+		query.append("    cre_usr_id," ).append("\n"); 
+		query.append("    cre_dt," ).append("\n"); 
+		query.append("    upd_usr_id," ).append("\n"); 
+		query.append("    upd_dt" ).append("\n"); 
+		query.append(") VALUES( " ).append("\n"); 
+		query.append("	@[intg_cd_id]," ).append("\n"); 
+		query.append("	@[intg_cd_nm]," ).append("\n"); 
+		query.append("	@[intg_cd_desc]," ).append("\n"); 
+		query.append("	@[intg_cd_tp_cd]," ).append("\n"); 
+		query.append("	'VARCHAR2', " ).append("\n"); 
+		query.append("	@[intg_cd_len], " ).append("\n"); 
+		query.append("	@[ownr_sub_sys_cd], " ).append("\n"); 
+		query.append("	@[mng_tbl_nm], " ).append("\n"); 
+		query.append("	@[intg_cd_use_flg], " ).append("\n"); 
+		query.append("	@[cre_usr_id]," ).append("\n"); 
+		query.append("	sysdate," ).append("\n"); 
+		query.append("	@[upd_usr_id]," ).append("\n"); 
+		query.append("	sysdate" ).append("\n"); 
+		query.append(")" ).append("\n"); 
 
 	}
 }

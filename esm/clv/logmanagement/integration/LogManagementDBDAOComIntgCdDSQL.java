@@ -4,10 +4,10 @@
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2023.05.05
+*@LastModifyDate : 2023.05.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2023.05.05 
+* 2023.05.10 
 * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.logmanagement.integration;
@@ -34,7 +34,7 @@ public class LogManagementDBDAOComIntgCdDSQL implements ISQLTemplate{
 	
 	/**
 	  * <pre>
-	  * LogManagementDBDAOComIntgCdDSQL
+	  * LogManagementDAOLogDSQL
 	  * </pre>
 	  */
 	public LogManagementDBDAOComIntgCdDSQL(){
@@ -50,7 +50,7 @@ public class LogManagementDBDAOComIntgCdDSQL implements ISQLTemplate{
 		params.put("intg_cd_id",new String[]{arrTmp[0],arrTmp[1]});
 
 		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.logmanagement.integration ").append("\n"); 
+		query.append("Path : com.clt.apps.opus.esm.clv.logmanagement.integration").append("\n"); 
 		query.append("FileName : LogManagementDBDAOComIntgCdDSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}

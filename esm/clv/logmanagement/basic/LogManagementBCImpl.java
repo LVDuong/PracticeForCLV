@@ -1,14 +1,14 @@
 /*=========================================================
- *Copyright(c) 2006 CyberLogitec
- *@FileName : CodeManagementBCImpl.java
- *@FileTitle : 공통코드관리
+ *Copyright(c) 2023 CyberLogitec
+ *@FileName : LogManagementBCImpl.java
+ *@FileTitle : Log Management
  *Open Issues :
  *Change history :
- *@LastModifyDate : 2006-09-07
- *@LastModifier : SeongWook Kim
+ *@LastModifyDate : 2023-05-05
+ *@LastModifier : 
  *@LastVersion : 1.0
- * 2006-09-07 SeongWook Kim
- * 1.0 최초 생성
+ * 2023-05-05
+ * 1.0 Creation
 =========================================================*/
 package com.clt.apps.opus.esm.clv.logmanagement.basic;
 
@@ -17,8 +17,8 @@ import java.util.List;
 
 import com.bluecast.util.DuplicateKeyException;
 import com.clt.apps.opus.esm.clv.logmanagement.integration.LogManagementDBDAO;
-import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtDtlVO;
-import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtMstVO;
+import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtDetailVO;
+import com.clt.apps.opus.esm.clv.logmanagement.vo.LogMgmtVO;
 import com.clt.framework.component.message.ErrorHandler;
 import com.clt.framework.component.rowset.DBRowSet;
 import com.clt.framework.core.layer.event.Event;
@@ -27,14 +27,6 @@ import com.clt.framework.core.layer.integration.DAOException;
 import com.clt.framework.support.layer.basic.BasicCommandSupport;
 import com.clt.framework.support.view.signon.SignOnUserAccount;
 
-/**
- * edm-edm Business Logic Basic Command implementation<br>
- * - edm-edm에 대한 비지니스 로직을 처리한다.<br>
- * 
- * @author SeongWook Kim
- * @see LogManagementBC 각 DAO 클래스 참조
- * @since J2EE 1.4
- */
 public class LogManagementBCImpl extends BasicCommandSupport implements LogManagementBC {
 
 	// Database Access Object
@@ -48,214 +40,202 @@ public class LogManagementBCImpl extends BasicCommandSupport implements LogManag
 		dbDao = new LogManagementDBDAO();
 	}
 
-	/**
-	 * 조회 이벤트 처리<br>
-	 * LogManagement화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @param Event e
-	 * @return DBRowSet
-	 * @exception EventException
-	 */
-	public DBRowSet searchAPPCodeList(Event e) throws EventException {
+	@Override
+	public List<LogMgmtVO> searchLogMgmtVO(LogMgmtVO logMgmtVO) throws EventException {
 		try {
-			return dbDao.searchAPPCodeList(e);
-		} catch (DAOException de) {
-			log.error("err " + de.toString(), de);
-			throw new EventException(de.getMessage());
-		}
-	}
-	
-	/**
-	 * 조회 이벤트 처리<br>
-	 * 화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @return String[]
-	 * @exception EventException
-	 */
-	public String[] searchSubSystemCodeList() throws EventException {
-
-		try {
-			return dbDao.searchSubSystemCodeList();
+			return dbDao.searchLogMgmtVO(logMgmtVO);
+		} catch(DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		} catch (Exception ex) {
-			throw new EventException(new ErrorHandler(ex).getMessage());
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		}
+		
+	}
+
+	@Override
+	public List<LogMgmtDetailVO> searchLogMgmtDetailVO(LogMgmtDetailVO logMgmtDetailVO) throws EventException {
+		try {
+			return dbDao.searchLogMgmtDetailVO(logMgmtDetailVO);
+		} catch(DAOException ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		}
 	}
 	
-	/**
-	 * 조회 이벤트 처리<br>
-	 * 화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @return String
-	 * @exception EventException
-	 */
-//	public String searchMaxIntgCdId() throws EventException {
-//		
-//		try {
-//			return dbDao.searchMaxIntgCdId();
-//		} catch (Exception ex) {
-//			throw new EventException(new ErrorHandler(ex).getMessage());
-//		}
-//	}
-
-	/**
-	 * 조회 이벤트 처리<br>
-	 * LogManagement화면에 대한 조회 이벤트 처리<br>
-	 * 
-	 * @param Event e
-	 * @return DBRowSet
-	 * @exception EventException
-	 */
-	public DBRowSet searchAPPCodeDetailList(Event e) throws EventException {
+	@Override
+	public void manageLogMgmtVO(LogMgmtVO[] logMgmtVOs, SignOnUserAccount account) throws EventException {
 		try {
-			return dbDao.searchAPPCodeDetailList(e);
-		} catch (DAOException de) {
-			log.error("err " + de.toString(), de);
-			throw new EventException(de.getMessage());
-		}
-	}
-
-	/**
-	 * 
-	 * multiLogMgmtMst
-	 * @author 김성욱
-	 * @param logMgmtMstVOs
-	 * @param account
-	 * @throws EventException void
-	 */
-	public void multiLogMgmtMst(LogMgmtMstVO[] logMgmtMstVOs, SignOnUserAccount account) throws EventException {
-		String errFlg = "";
-		String dupFlg = "";
-//		GeneralCodeMgtBC command = new GeneralCodeMgtBCImpl();
-		
-		try {
-			List<LogMgmtMstVO> insertVoList = new ArrayList<LogMgmtMstVO>();
-			List<LogMgmtMstVO> updateVoList = new ArrayList<LogMgmtMstVO>();
-			List<LogMgmtMstVO> deleteVoList = new ArrayList<LogMgmtMstVO>();
-
-			for ( int i=0; i<logMgmtMstVOs .length; i++ ) {
-				if ( logMgmtMstVOs[i].getIbflag().equals("I")){
-					logMgmtMstVOs[i].setCreUsrId(account.getUsr_id());
-					logMgmtMstVOs[i].setUpdUsrId(account.getUsr_id());
-					insertVoList.add(logMgmtMstVOs[i]);
-				} else if ( logMgmtMstVOs[i].getIbflag().equals("U")){
-					logMgmtMstVOs[i].setUpdUsrId(account.getUsr_id());
-					updateVoList.add(logMgmtMstVOs[i]);
-				} else if ( logMgmtMstVOs[i].getIbflag().equals("D")){
-					deleteVoList.add(logMgmtMstVOs[i]);
-				}				
-			} 
-
-			if ( insertVoList.size() > 0 ) {
-				//Checking Duplication
-				for( int idx=0; idx<insertVoList.size(); idx++ ){
-					dupFlg = dbDao.searchDupChkLogMgmtMst(insertVoList.get(idx));
-					if( "Y".equals(dupFlg) ){
-						errFlg = "Y";
+			//List needs to be inserted
+			List<LogMgmtVO> insertVoList = new ArrayList<LogMgmtVO>();
+			
+			//List needs to be updated
+			List<LogMgmtVO> updateVoList = new ArrayList<LogMgmtVO>();
+			
+			//List needs to be deleted
+			List<LogMgmtVO> deleteVoList = new ArrayList<LogMgmtVO>();
+			
+			List<LogMgmtDetailVO> deleteLogMgmtDetailList = new ArrayList<LogMgmtDetailVO>();
+			//Invalid code
+			StringBuilder invalidMsgCds=new StringBuilder();
+			
+			//loop through logMgmtVOs and base on IbFlag to perform corresponding action
+			for ( int i=0; i<logMgmtVOs.length; i++ ) {
+				
+				//Insert
+				if ( logMgmtVOs[i].getIbflag().equals("I")){
+					//Condition need to check before inserting
+					LogMgmtVO condition = new LogMgmtVO();
+					//set IntgCdId for condition
+					condition.setIntgCdId(logMgmtVOs[i].getIntgCdId());
+					
+					//if code don't exist
+					if(searchLogMgmtVO(condition).size()==0){
+						//set CreUsrId is current user id
+						logMgmtVOs[i].setCreUsrId(account.getUsr_id());
+						
+						//set UpdUsrId is current user id
+						logMgmtVOs[i].setUpdUsrId(account.getUsr_id());
+						
+						//add to inserting list
+						insertVoList.add(logMgmtVOs[i]);
+					}else{
+						//if code already existed
+						//append invalid code to invalidMsgCds variable
+						invalidMsgCds.append(logMgmtVOs[i].getIntgCdId()+"|");
 					}
-				}
-				if( !"Y".equals(errFlg) ){
-					dbDao.addAPPCodeList(insertVoList);
-//					command.manageIntgCdToMnrBasic(insertVoList);
-				} else{
-					throw new DuplicateKeyException(new ErrorHandler("COM12115",new String[]{"Master Code"}).getMessage());
+				} else if (logMgmtVOs[i].getIbflag().equals("U")){
+					//Update
+					//set UpdUsrId is current user id
+					logMgmtVOs[i].setUpdUsrId(account.getUsr_id());
+					
+					//add to updating list
+					updateVoList.add(logMgmtVOs[i]);
+				} else if ( logMgmtVOs[i].getIbflag().equals("D")){
+					LogMgmtDetailVO logMgmtDetailVO = new LogMgmtDetailVO();
+					logMgmtDetailVO.setIntgCdId(logMgmtVOs[i].getIntgCdId());
+					deleteLogMgmtDetailList.addAll(dbDao.searchLogMgmtDetailVO(logMgmtDetailVO));
+					deleteVoList.add(logMgmtVOs[i]);
 				}
 			}
 			
+			//if we have invalid data (because code already existed)
+			if(invalidMsgCds.length()!=0){
+				//remove "|" at the end
+				invalidMsgCds.deleteCharAt(invalidMsgCds.length()-1);
+				//throw new EventException 
+				throw new EventException(new ErrorHandler("ERR12356", new String[]{invalidMsgCds.toString()}).getMessage());
+			}
+			
+			//if inserting list isn't empty
+			if ( insertVoList.size() > 0 ) {
+				dbDao.addLogMgmtVOs(insertVoList);
+			}
+			
+			//if updating list isn't empty
 			if ( updateVoList.size() > 0 ) {
-				dbDao.modifyLogMgmtMst(updateVoList);
-//				command.manageIntgCdToMnrBasic(updateVoList);
+				dbDao.updateLogMgmtVOs(updateVoList);
 			}
 			
+//			//if deleting list isn't empty
 			if ( deleteVoList.size() > 0 ) {
-				dbDao.removeLogMgmtMst(deleteVoList);
-//				command.manageIntgCdToMnrBasic(deleteVoList);
+				if(deleteLogMgmtDetailList.size()>0){					
+					dbDao.removeLogMgmtDetailVOs(deleteLogMgmtDetailList);
+				}
+				dbDao.removeLogMgmtVOs(deleteVoList);
 			}
-			
-		} catch(DuplicateKeyException de) {
-			log.error("err " + de.toString(), de);
-			throw new EventException(new ErrorHandler("COM12115",new String[]{"Master Code"}).getMessage());
 		} catch(DAOException ex) {
-			log.error("err " + ex.toString(), ex);
-			throw new EventException(new ErrorHandler("COM12240",new String[]{}).getMessage(), ex);
-		} catch(Exception ex) {
-			log.error("err " + ex.toString(), ex);
-			throw new EventException(new ErrorHandler("COM12240",new String[]{}).getMessage(), ex);
+			// throw new EventException if we have DAOException
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			//other exception
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		}
+		
 	}
 	
-	/**
-	 * 
-	 * multiLogMgmtDtl
-	 * @author 김성욱
-	 * @param logMgmtDtlVOs
-	 * @param account
-	 * @throws EventException void
-	 */
-	public void multiLogMgmtDtl(LogMgmtDtlVO[] logMgmtDtlVOs, SignOnUserAccount account) throws EventException {
-		String errFlg = "";
-		String dupFlg = "";
-		
+	@Override
+	public void manageLogMgmtDetailVO(LogMgmtDetailVO[] logMgmtDetailVOs, SignOnUserAccount account) throws EventException {
 		try {
-			List<LogMgmtDtlVO> insertVoList = new ArrayList<LogMgmtDtlVO>();
-			List<LogMgmtDtlVO> updateVoList = new ArrayList<LogMgmtDtlVO>();
-			List<LogMgmtDtlVO> deleteVoList = new ArrayList<LogMgmtDtlVO>();
-
-			for ( int i=0; i<logMgmtDtlVOs .length; i++ ) {
-				if ( logMgmtDtlVOs[i].getIbflag().equals("I")){
-					logMgmtDtlVOs[i].setCreUsrId(account.getUsr_id());
-					logMgmtDtlVOs[i].setUpdUsrId(account.getUsr_id());
-					insertVoList.add(logMgmtDtlVOs[i]);
-				} else if ( logMgmtDtlVOs[i].getIbflag().equals("U")){
-					logMgmtDtlVOs[i].setUpdUsrId(account.getUsr_id());
-					updateVoList.add(logMgmtDtlVOs[i]);
-				} else if ( logMgmtDtlVOs[i].getIbflag().equals("D")){
-					deleteVoList.add(logMgmtDtlVOs[i]);
-				}				
-			} 
-
-			if ( insertVoList.size() > 0 ) {
-				//Checking Duplication
-				for( int idx=0; idx<insertVoList.size(); idx++ ){
-					dupFlg = dbDao.searchDupChkLogMgmtDtl(insertVoList.get(idx));
-					if( "Y".equals(dupFlg) ){
-						errFlg = "Y";
+			//List needs to be inserted
+			List<LogMgmtDetailVO> insertVoList = new ArrayList<LogMgmtDetailVO>();
+			
+			//List needs to be updated
+			List<LogMgmtDetailVO> updateVoList = new ArrayList<LogMgmtDetailVO>();
+			
+			//List needs to be deleted
+			List<LogMgmtDetailVO> deleteVoList = new ArrayList<LogMgmtDetailVO>();
+			
+			//Invalid code
+			StringBuilder invalidMsgCds=new StringBuilder();
+			
+			//loop through logMgmtDetailVOs and base on IbFlag to perform corresponding action
+			for ( int i=0; i<logMgmtDetailVOs.length; i++ ) {
+				
+				//Insert
+				if ( logMgmtDetailVOs[i].getIbflag().equals("I")){
+					//Condition need to check before inserting
+					LogMgmtDetailVO condition = new LogMgmtDetailVO();
+					//set IntgCdId for condition
+					condition.setIntgCdId(logMgmtDetailVOs[i].getIntgCdId());
+					condition.setIntgCdValCtnt(logMgmtDetailVOs[i].getIntgCdValCtnt());
+					
+//					if code don't exist
+					if(searchLogMgmtDetailVO(condition).size()==0){
+						//set CreUsrId is current user id
+						logMgmtDetailVOs[i].setCreUsrId(account.getUsr_id());
+						
+						//set UpdUsrId is current user id
+						logMgmtDetailVOs[i].setUpdUsrId(account.getUsr_id());
+						
+						//add to inserting list
+						insertVoList.add(logMgmtDetailVOs[i]);
+					}else{
+						//if message code already existed
+						//append invalid message code to invalidMsgCds variable
+						invalidMsgCds.append(logMgmtDetailVOs[i].getIntgCdValCtnt()+"|");
 					}
-				}
-				if( !"Y".equals(errFlg) ){
-					dbDao.addAPPCodeDetailList(insertVoList);
-//					command.manageIntgDtlCdToMnrBasic(insertVoList);
-				} else{
-					throw new DuplicateKeyException(new ErrorHandler("COM12115",new String[]{"Detail Code"}).getMessage());
+				} else if ( logMgmtDetailVOs[i].getIbflag().equals("U")){
+					//Update
+					//set UpdUsrId is current user id
+					logMgmtDetailVOs[i].setUpdUsrId(account.getUsr_id());
+					
+					//add to updating list
+					updateVoList.add(logMgmtDetailVOs[i]);
+				} else if ( logMgmtDetailVOs[i].getIbflag().equals("D")){
+					deleteVoList.add(logMgmtDetailVOs[i]);
 				}
 			}
 			
+			//if we have invalid data( because message code already existed)
+			if(invalidMsgCds.length()!=0){
+				//remove "|" at the end
+				invalidMsgCds.deleteCharAt(invalidMsgCds.length()-1);
+				//throw new EventException 
+				throw new EventException(new ErrorHandler("ERR12356", new String[]{invalidMsgCds.toString()}).getMessage());
+			}
+			
+			//if inserting list isn't empty
+			if ( insertVoList.size() > 0 ) {
+				dbDao.addLogMgmtDetailVOs(insertVoList);
+			}
+			
+			//if updating list isn't empty
 			if ( updateVoList.size() > 0 ) {
-				dbDao.modifyLogMgmtDtl(updateVoList);
-//				command.manageIntgDtlCdToMnrBasic(updateVoList);
+				dbDao.updateLogMgmtDetailVOs(updateVoList);
 			}
 			
+			//if deleting list isn't empty
 			if ( deleteVoList.size() > 0 ) {
-				dbDao.removeLogMgmtDtl(deleteVoList);
-//				command.manageIntgDtlCdToMnrBasic(deleteVoList);
+				dbDao.removeLogMgmtDetailVOs(deleteVoList);
 			}
-			
-		} catch(DuplicateKeyException de) {
-			log.error("err " + de.toString(), de);
-			throw new EventException(new ErrorHandler("COM12115",new String[]{"Detail Code"}).getMessage());
 		} catch(DAOException ex) {
-			log.error("err " + ex.toString(), ex);
-			throw new EventException(new ErrorHandler("COM12240",new String[]{}).getMessage(), ex);
-		} catch(Exception ex) {
-			log.error("err " + ex.toString(), ex);
-			throw new EventException(new ErrorHandler("COM12240",new String[]{}).getMessage(), ex);
+			// throw new EventException if we have DAOException
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
+		} catch (Exception ex) {
+			//other exception
+			throw new EventException(new ErrorHandler(ex).getMessage(),ex);
 		}
-	}
-
-	/**
-	 * edm 업무 시나리오 마감작업<br>
-	 * LogManagement업무 시나리오 종료시 관련 내부객체 해제<br>
-	 */
-	public void doEnd() {
-		dbDao = null;
+		
 	}
 }
