@@ -1,16 +1,16 @@
 /*=========================================================
 *Copyright(c) 2023 CyberLogitec
-*@FileName : LogMsgMgmtDBDAOErrMsgVOCSQL.java
+*@FileName : CarrierMgmtDBDAOCarrierVOUSQL.java
 *@FileTitle : 
 *Open Issues :
 *Change history :
-*@LastModifyDate : 2023.04.20
+*@LastModifyDate : 2023.05.10
 *@LastModifier : 
 *@LastVersion : 1.0
-* 2023.04.20 
+* 2023.05.10 
 * 1.0 Creation
 =========================================================*/
-package com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.integration;
+package com.clt.apps.opus.java.carriermanagement.integration;
 
 import java.util.HashMap;
 import org.apache.log4j.Logger;
@@ -18,12 +18,12 @@ import com.clt.framework.support.db.ISQLTemplate;
 
 /**
  *
- * @author DuongLe
+ * @author Duong Le
  * @see DAO 참조
  * @since J2EE 1.6
  */
 
-public class LogMsgMgmtDBDAOErrMsgVOCSQL implements ISQLTemplate{
+public class CarrierMgmtDBDAOCarrierVOUSQL implements ISQLTemplate{
 
 	private StringBuffer query = new StringBuffer();
 	
@@ -34,10 +34,10 @@ public class LogMsgMgmtDBDAOErrMsgVOCSQL implements ISQLTemplate{
 	
 	/**
 	  * <pre>
-	  *    
+	  * CarrierMgmtDAOCarrierVOUSQL.Query
 	  * </pre>
 	  */
-	public LogMsgMgmtDBDAOErrMsgVOCSQL(){
+	public CarrierMgmtDBDAOCarrierVOUSQL(){
 		setQuery();
 		params = new HashMap<String,String[]>();
 		String tmp = null;
@@ -47,21 +47,21 @@ public class LogMsgMgmtDBDAOErrMsgVOCSQL implements ISQLTemplate{
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("err_msg",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("jo_crr_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("err_tp_cd",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("vndr_seq",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("err_lvl_cd",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("rlane_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
@@ -75,25 +75,32 @@ public class LogMsgMgmtDBDAOErrMsgVOCSQL implements ISQLTemplate{
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("err_msg_cd",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("trd_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("cre_usr_id",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("cust_seq",new String[]{arrTmp[0],arrTmp[1]});
 
 		tmp = java.sql.Types.VARCHAR + ",N";
 		arrTmp = tmp.split(",");
 		if(arrTmp.length !=2){
 			throw new IllegalArgumentException();
 		}
-		params.put("err_desc",new String[]{arrTmp[0],arrTmp[1]});
+		params.put("delt_flg",new String[]{arrTmp[0],arrTmp[1]});
+
+		tmp = java.sql.Types.VARCHAR + ",N";
+		arrTmp = tmp.split(",");
+		if(arrTmp.length !=2){
+			throw new IllegalArgumentException();
+		}
+		params.put("cust_cnt_cd",new String[]{arrTmp[0],arrTmp[1]});
 
 		query.append("/*").append("\n"); 
-		query.append("Path : com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.integration").append("\n"); 
-		query.append("FileName : LogMsgMgmtDBDAOErrMsgVOCSQL").append("\n"); 
+		query.append("Path : com.clt.apps.opus.esm.clv.carriermanagement.integration ").append("\n"); 
+		query.append("FileName : CarrierMgmtDBDAOCarrierVOUSQL").append("\n"); 
 		query.append("*/").append("\n"); 
 	}
 	
@@ -109,25 +116,18 @@ public class LogMsgMgmtDBDAOErrMsgVOCSQL implements ISQLTemplate{
 	 * Query 생성
 	 */
 	public void setQuery(){
-		query.append("INSERT INTO COM_ERR_MSG (" ).append("\n"); 
-		query.append("	upd_usr_id" ).append("\n"); 
-		query.append(",	cre_usr_id" ).append("\n"); 
-		query.append(",	err_desc" ).append("\n"); 
-		query.append(",	ERR_MSG" ).append("\n"); 
-		query.append(",	ERR_LVL_CD" ).append("\n"); 
-		query.append(",	ERR_TP_CD" ).append("\n"); 
-		query.append(",	LANG_TP_CD" ).append("\n"); 
-		query.append(",	ERR_MSG_CD" ).append("\n"); 
-		query.append(") VALUES( " ).append("\n"); 
-		query.append("	@[upd_usr_id]" ).append("\n"); 
-		query.append(",	@[cre_usr_id]" ).append("\n"); 
-		query.append(",	@[err_desc]" ).append("\n"); 
-		query.append(",	@[err_msg]" ).append("\n"); 
-		query.append(",	@[err_lvl_cd]" ).append("\n"); 
-		query.append(",	@[err_tp_cd]" ).append("\n"); 
-		query.append(",	'ENG'" ).append("\n"); 
-		query.append(",	@[err_msg_cd]" ).append("\n"); 
-		query.append(")" ).append("\n"); 
+		query.append("update joo_carrier set" ).append("\n"); 
+		query.append("	jo_crr_cd = @[jo_crr_cd]," ).append("\n"); 
+		query.append("	rlane_cd = @[rlane_cd]," ).append("\n"); 
+		query.append("    vndr_seq = @[vndr_seq], " ).append("\n"); 
+		query.append("    cust_cnt_cd = @[cust_cnt_cd], " ).append("\n"); 
+		query.append("    cust_seq = @[cust_seq], " ).append("\n"); 
+		query.append("    trd_cd = @[trd_cd], " ).append("\n"); 
+		query.append("    delt_flg = @[delt_flg]," ).append("\n"); 
+		query.append("    upd_dt = sysdate, " ).append("\n"); 
+		query.append("    upd_usr_id = @[upd_usr_id]" ).append("\n"); 
+		query.append("where jo_crr_cd = @[jo_crr_cd]" ).append("\n"); 
+		query.append("    and rlane_cd = @[rlane_cd]" ).append("\n"); 
 
 	}
 }
