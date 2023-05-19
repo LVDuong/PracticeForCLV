@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mappings xmlns="http://www.cyberlogitec.com/mappings">
+	<!-- DuongLe : 2023-04-20 start -->
+    <url-mapping url="CLV_LOG_001.do" screen="CLV_LOG_001.screen" >
+        <web-action-class>com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.event.CLV_LOG_001HTMLAction</web-action-class>
+    </url-mapping>
+
+    <url-mapping url="CLV_LOG_001GS.do" screen="com.clt.framework.core.controller.DefaultViewAdapter" >
+        <web-action-class>com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.event.CLV_LOG_001HTMLAction</web-action-class>
+    </url-mapping>
+
+    <event-mapping>
+        <event-class>com.clt.apps.opus.esm.clv.clvtraining.logmsgmgmt.event.ClvLog001Event</event-class>
+        <service-action-class>com.clt.apps.opus.esm.clv.clvtraining.ClvTrainingSC</service-action-class>
+    </event-mapping>
+	<!-- DuongLe : 2023-04-20 end -->
+	
+	<!-- DuongLe : 2023-05-05 start -->
+    <url-mapping url="CLV_LOG_002.do" screen="CLV_LOG_002.screen" >
+        <web-action-class>com.clt.apps.opus.esm.clv.logmanagement.event.LogManagementHTMLAction</web-action-class>
+    </url-mapping>
+
+    <url-mapping url="CLV_LOG_002GS.do" screen="com.clt.framework.core.controller.DefaultViewAdapter" >
+        <web-action-class>com.clt.apps.opus.esm.clv.logmanagement.event.LogManagementHTMLAction</web-action-class>
+    </url-mapping>
+
+    <event-mapping>
+        <event-class>com.clt.apps.opus.esm.clv.logmanagement.event.LogManagementEvent</event-class>
+        <service-action-class>com.clt.apps.opus.esm.clv.logmanagement.LogManagementSC</service-action-class>
+    </event-mapping>
+	<!-- DuongLe : 2023-05-05 end -->
+	
+	<!-- DuongLe : 2023-05-09 start -->
+    <url-mapping url="PRACTICE_0004.do" screen="PRACTICE_0004.screen" >
+        <web-action-class>com.clt.apps.opus.esm.clv.carriermanagement.event.PRACTICE_0004HTMLAction</web-action-class>
+    </url-mapping>
+
+    <url-mapping url="PRACTICE_0004GS.do" screen="com.clt.framework.core.controller.DefaultViewAdapter" >
+        <web-action-class>com.clt.apps.opus.esm.clv.carriermanagement.event.PRACTICE_0004HTMLAction</web-action-class>
+    </url-mapping>
+
+    <event-mapping>
+        <event-class>com.clt.apps.opus.esm.clv.carriermanagement.event.Practice0004Event</event-class>
+        <service-action-class>com.clt.apps.opus.esm.clv.carriermanagement.CarrierManagementSC</service-action-class>
+    </event-mapping>
+	<!-- DuongLe : 2023-05-09 end -->
+	
+	<!-- DuongLe : 2023-05-10 start -->
+    <url-mapping url="CUS_0004.do" screen="CUS_0004.screen" >
+        <web-action-class>com.clt.apps.opus.esm.clv.carriermanagement.event.PRACTICE_0004HTMLAction</web-action-class>
+    </url-mapping>
+
+    <url-mapping url="CUS_0004GS.do" screen="com.clt.framework.core.controller.DefaultViewAdapter" >
+        <web-action-class>com.clt.apps.opus.esm.clv.carriermanagement.event.PRACTICE_0004HTMLAction</web-action-class>
+    </url-mapping>
+
+    <event-mapping>
+        <event-class>com.clt.apps.opus.esm.clv.carriermanagement.event.Practice0004Event</event-class>
+        <service-action-class>com.clt.apps.opus.esm.clv.carriermanagement.CarrierManagementSC</service-action-class>
+    </event-mapping>
+	<!-- DuongLe : 2023-05-10 end -->
+	
+	<!-- DuongLe : 2023-05-15 start -->
+    <url-mapping url="PRACTICE_0003.do" screen="PRACTICE_0003.screen" >
+        <web-action-class>com.clt.apps.opus.esm.clv.moneymgmt.event.PRACTICE_0003HTMLAction</web-action-class>
+    </url-mapping>
+
+    <url-mapping url="PRACTICE_0003GS.do" screen="com.clt.framework.core.controller.DefaultViewAdapter" >
+        <web-action-class>com.clt.apps.opus.esm.clv.moneymgmt.event.PRACTICE_0003HTMLAction</web-action-class>
+    </url-mapping>
+
+    <event-mapping>
+        <event-class>com.clt.apps.opus.esm.clv.moneymgmt.event.Practice0003Event</event-class>
+        <service-action-class>com.clt.apps.opus.esm.clv.moneymgmt.MoneyManagementSC</service-action-class>
+    </event-mapping>
+	<!-- DuongLe : 2023-05-15 end -->
+	
+
+</mappings>
